@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {Observable} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {SignupResponseType} from "../../../types/signup-response.type";
 import {DefaultResponseType} from "../../../types/default-response.type";
 import {LoginResponseType} from "../../../types/login-response.type";
@@ -12,8 +12,13 @@ import {LoginResponseType} from "../../../types/login-response.type";
 export class AuthService {
 
   public accessTokenKey: string = 'Token';
+  public isLogged$: Subject<boolean> = new Subject<boolean>();
+  private isLogged: boolean = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    this.isLogged = !!localStorage.getItem(this.accessTokenKey)
+  }
+
 
   login(username: string, password: string): Observable<LoginResponseType | DefaultResponseType> {
     return this.http.post<LoginResponseType | DefaultResponseType>(environment.api + 'auth', {
@@ -27,13 +32,25 @@ export class AuthService {
     })
   }
 
+  public getIsLoggedIn() {
+    return this.isLogged;
+  }
+
   public setToken(accessToken: string): void {
     localStorage.setItem(this.accessTokenKey, accessToken);
+    this.isLogged = true;
+    this.isLogged$.next(true);
   }
 
   public removeToken(): void {
     localStorage.removeItem(this.accessTokenKey);
+    this.isLogged = false;
+    this.isLogged$.next(false);
   }
+
+  // logout(): void {
+  //   this.removeToken();
+  // }
 
   public getToken(): {accessToken: string | null} {
     return {

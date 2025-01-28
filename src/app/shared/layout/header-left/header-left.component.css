@@ -1,0 +1,59 @@
+/* Стили для бокового меню */
+.sidebar {
+  width: 250px;
+  min-height: 100vh;
+  background-color: #343a40; /* Цвет из bg-dark */
+  overflow-y: auto;
+  transition: all 0.3s;
+  z-index: 1000;
+}
+
+.sidebar-dark {
+  background-color: #23272b; /* Более тёмный оттенок */
+}
+
+.sidebar .nav-item {
+  width: 100%;
+}
+
+.sidebar .nav-link {
+  color: #adb5bd; /* Светло-серый цвет текста */
+  padding: 12px 16px;
+  display: block;
+  transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.sidebar .nav-link:hover {
+  background-color: #495057; /* Цвет ховера */
+  color: #fff;
+}
+
+.sidebar-brand {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  padding: 20px;
+}
+
+.sidebar-divider {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 10px 0;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #fff;
+}
+
+/* Скрытие бокового меню на маленьких экранах */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+}

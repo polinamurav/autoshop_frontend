@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-header-left',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header-left.component.css']
 })
 export class HeaderLeftComponent implements OnInit {
+
+  @Input() isLogged: boolean = false;
 
   constructor() { }
 
