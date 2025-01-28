@@ -9,6 +9,7 @@ import { HeaderTopComponent } from './shared/layout/header-top/header-top.compon
 import { HeaderLeftComponent } from './shared/layout/header-left/header-left.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from "./shared/shared.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import {SharedModule} from "./shared/shared.module";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     SharedModule,
     AppRoutingModule,
     NgbModule

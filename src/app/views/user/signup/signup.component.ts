@@ -1,0 +1,70 @@
+import { Component, OnInit } from '@angular/core';
+import {AuthService} from "../../../core/auth/auth.service";
+import {FormBuilder, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
+import {DefaultResponseType} from "../../../../types/default-response.type";
+import {SignupResponseType} from "../../../../types/signup-response.type";
+
+@Component({
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
+})
+export class SignupComponent implements OnInit {
+
+  signupForm = this.fb.group({
+    name: ['', Validators.required],
+    phone: ['', Validators.required],
+    username: ['', Validators.required],
+    email: ['', [Validators.email, Validators.required]],
+    password: ['', [Validators.required, Validators.pattern('^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$')]],
+  });
+
+  constructor(private authService: AuthService,
+              private fb: FormBuilder,
+              private router: Router) { }
+
+  ngOnInit(): void {
+
+  }
+
+  signup(): void {
+    if (this.signupForm.valid && this.signupForm.value.email && this.signupForm.value.password
+      && this.signupForm.value.name && this.signupForm.value.phone && this.signupForm.value.username) {
+      this.authService.signup(this.signupForm.value.username, this.signupForm.value.email, this.signupForm.value.password, this.signupForm.value.name, this.signupForm.value.phone)
+        .subscribe({
+          next: (data: DefaultResponseType | SignupResponseType) => {
+            let error = null;
+            if ((data as DefaultResponseType).status === 400) {
+              error = (data as DefaultResponseType).message;
+            }
+
+            const signupResponse = data as SignupResponseType;
+            if (!signupResponse.id || !signupResponse.email || !signupResponse.username) {
+              error = 'Ошибка регистрации';
+            }
+
+            if (error) {
+              // this._snackBar.open(error);
+              throw new Error(error);
+            }
+
+            // this.authService.setToken(signupResponse.accessToken);
+            // this._snackBar.open('Вы успешно зарегистрировались');
+            alert('Вы успешно зарегистрировались');
+            this.router.navigate(['/login']);
+          },
+          error: (errorResponse: HttpErrorResponse) => {
+            if (errorResponse.error && errorResponse.error.message) {
+              // this._snackBar.open(errorResponse.error.message);
+              console.log(errorResponse.error.message);
+            } else {
+              // this._snackBar.open('Ошибка регистрации');
+              console.log('Ошибка регистрации');
+            }
+          }
+        })
+    }
+  }
+}

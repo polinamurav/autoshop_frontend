@@ -1,0 +1,60 @@
+<body class="bg-gradient-dark">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-12">
+      <div class="card shadow-lg o-hidden border-0 my-5">
+        <div class="card-body p-0">
+          <div class="p-5">
+
+            <div class="text-center">
+              <h4 class="text-dark mb-4">Регистрация</h4>
+            </div>
+
+            <!--            <div class="alert alert-warning text-center" role="alert">-->
+            <!--              <strong ></strong>-->
+            <!--            </div>-->
+
+            <form [formGroup]="signupForm" action="/reg" method="post">
+              <div class="mb-3">
+                <input class="form-control" type="text"
+                       [ngStyle]="{'border-color': signupForm.get('name')?.invalid
+                 && (signupForm.get('name')?.dirty || signupForm.get('name')?.touched) ? 'red' : '' }"
+                       placeholder="ФИО" name="fio" formControlName="name">
+              </div>
+              <div class="mb-3">
+                <input class="form-control" type="tel"
+                       [ngStyle]="{'border-color': signupForm.get('phone')?.invalid
+                 && (signupForm.get('phone')?.dirty || signupForm.get('phone')?.touched) ? 'red' : '' }"
+                       placeholder="Тел. номер (xxx-xx-xxx-xx-xx)" name="tel" formControlName="phone">
+              </div>
+              <div class="mb-3">
+                <input class="form-control" type="email"
+                       [ngStyle]="{'border-color': signupForm.get('email')?.invalid
+                 && (signupForm.get('email')?.dirty || signupForm.get('email')?.touched) ? 'red' : '' }"
+                       placeholder="Электронная почта" formControlName="email">
+              </div>
+              <div class="mb-3">
+                <input class="form-control" type="text"
+                       [ngStyle]="{'border-color': signupForm.get('username')?.invalid
+                 && (signupForm.get('username')?.dirty || signupForm.get('username')?.touched) ? 'red' : '' }"
+                       placeholder="Логин" name="username" formControlName="username">
+              </div>
+              <div class="mb-3">
+                <input class="form-control" type="password"
+                       [ngStyle]="{'border-color': signupForm.get('password')?.invalid
+                 && (signupForm.get('password')?.dirty || signupForm.get('password')?.touched) ? 'red' : '' }"
+                       placeholder="Пароль" formControlName="password">
+              </div>
+              <button class="btn btn-dark w-100" [disabled]="signupForm.invalid" (click)="signup()">Регистрация</button>
+              <hr>
+            </form>
+
+            <a routerLink="/login" class="btn btn-dark w-100 mb-2">Вход</a>
+            <a routerLink="/" class="btn btn-dark w-100 mb-2">Главная страница</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
