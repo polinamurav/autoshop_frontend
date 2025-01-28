@@ -1,1 +1,41 @@
-<p>login works!</p>
+<body class="bg-gradient-dark">
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-6 col-12">
+      <div class="card shadow-lg o-hidden border-0 my-5">
+        <div class="card-body p-0">
+          <div class="p-5">
+
+            <div class="text-center">
+              <h4 class="text-dark mb-4">Вход</h4>
+            </div>
+
+<!--            <div th:if="${param.error}" class="alert alert-warning text-center" role="alert">-->
+<!--              <strong>Некорректный ввод логина или пароля</strong>-->
+<!--            </div>-->
+
+            <form [formGroup]="loginForm">
+              <div class="mb-3">
+                <input class="form-control" type="text"
+                       [ngStyle]="{'border-color': loginForm.get('username')?.invalid
+                 && (loginForm.get('username')?.dirty || loginForm.get('username')?.touched) ? 'red' : '' }"
+                       placeholder="Логин" formControlName="username">
+              </div>
+              <div class="mb-3">
+                <input class="form-control" type="password"
+                       [ngStyle]="{'border-color': loginForm.get('password')?.invalid
+                 && (loginForm.get('password')?.dirty || loginForm.get('password')?.touched) ? 'red' : '' }"
+                       placeholder="Пароль" formControlName="password">
+              </div>
+              <button class="btn btn-dark w-100" [disabled]="loginForm.invalid" (click)="login()">Вход</button>
+              <hr>
+            </form>
+            <a routerLink="/signup" class="btn btn-dark w-100 mb-2">Регистрация</a>
+            <a routerLink="/" class="btn btn-dark w-100 mb-2">Главная страница</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
