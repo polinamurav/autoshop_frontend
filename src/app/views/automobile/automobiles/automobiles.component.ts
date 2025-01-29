@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {AutomobileResponseType} from "../../../../types/automobile-response.type";
+import {AutomobilesService} from "../../../shared/services/automobiles.service";
 
 @Component({
   selector: 'app-automobiles',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AutomobilesComponent implements OnInit {
 
-  constructor() { }
+  automobiles: AutomobileResponseType[] = []
+
+  constructor(private automobileService: AutomobilesService) { }
 
   ngOnInit(): void {
+    this.automobileService.getAutomobiles()
+      .subscribe((data: AutomobileResponseType[]) => {
+        this.automobiles = data;
+      });
   }
 
 }

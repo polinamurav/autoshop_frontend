@@ -1,1 +1,56 @@
-<p>automobiles works!</p>
+<div class="container-fluid">
+
+  <h3 class="text-dark mb-4">Автомобили</h3>
+
+  <a routerLink="/automobiles/add" class="btn btn-dark w-100 mb-3">Добавить</a>
+
+  <div class="card shadow mb-3">
+    <div class="card-body">
+      <form action="/automobiles/search" method="get">
+        <div class="row">
+          <div class="col-12 col-lg-auto mb-2">
+            <a routerLink="/automobiles" class="btn btn-secondary w-100">Сбросить</a>
+          </div>
+          <div class="col-12 col-lg mb-2">
+            <select name="carModelId" required class="form-select">
+              <option
+              ></option>
+<!--                <option th:each="i : ${models}" th:value="${i.id}" th:label="${i.name}"-->
+<!--                        th:selected="${i.id == carModelId}"></option>-->
+            </select>
+          </div>
+          <div class="col-12 col-lg-auto mb-2">
+            <button class="btn btn-primary w-100" type="submit">Поиск</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="automobiles && automobiles.length > 0">
+    <div  class="col-12 col-lg-4 mb-3" *ngFor="let automobile of automobiles">
+      <div class="card shadow">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-lg-5 col-12 text-center">
+              <a [routerLink]="'/automobiles/' + automobile.id">
+                <img [src]="automobile.photo"class="rounded-3 shadow"
+                     style="max-height: 250px;max-width: 100%">
+              </a>
+            </div>
+            <div class="col">
+              <p class="lead mb-1">{{ automobile.name }}</p>
+              <p class="mb-1">Цена: {{ automobile.price }}</p>
+              <p class="mb-1">Модель: {{ automobile.carModel.name }}</p>
+              <p class="mb-1">Тип двигателя: {{ automobile.engineType }}</p>
+              <p class="mb-1">Страна производства: {{ automobile.origin }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ProductType} from "../../../types/product.type";
+import {AutomobileResponseType} from "../../../types/automobile-response.type";
 import {AutomobilesService} from "../../shared/services/automobiles.service";
 
 @Component({
@@ -9,13 +9,13 @@ import {AutomobilesService} from "../../shared/services/automobiles.service";
 })
 export class MainComponent implements OnInit {
 
-  automobiles: ProductType[] = [];
+  automobiles: AutomobileResponseType[] = [];
 
   constructor(private automobileService: AutomobilesService) { }
 
   ngOnInit(): void {
     this.automobileService.getAutomobiles()
-      .subscribe((data: ProductType[]) => {
+      .subscribe((data: AutomobileResponseType[]) => {
         this.automobiles = data;
       });
   }
