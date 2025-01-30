@@ -9,6 +9,7 @@ import {DefaultResponseType} from "../../../../types/default-response.type";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ModelType} from "../../../../types/model.type";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ModelsService} from "../../../shared/services/models.service";
 
 @Component({
   selector: 'app-automobile-add',
@@ -35,14 +36,14 @@ export class AutomobileAddComponent implements OnInit {
 
   constructor(private router: Router,
               private automobilesService: AutomobilesService,
-              private authService: AuthService,
+              private modelsService: ModelsService,
               private _snackBar: MatSnackBar,
               private fb: FormBuilder) {
 
   }
 
   ngOnInit(): void {
-    this.automobilesService.getModels()
+    this.modelsService.getModels()
       .subscribe((modelData: ModelType[]) => {
         this.models = modelData;
       });
@@ -79,7 +80,7 @@ export class AutomobileAddComponent implements OnInit {
             error = (data as DefaultResponseType).message;
           }
 
-          // const automobileResponse = data as AutomobileResponseType;
+          const automobileResponse = data as AutomobileResponseType;
           // if (!automobileResponse.id || !automobileResponse.name || !automobileResponse.photo
           //   || !automobileResponse.origin || !automobileResponse.price || !automobileResponse.count
           //   || automobileResponse.engineType || !automobileResponse.carModel || !automobileResponse.applications
@@ -93,7 +94,7 @@ export class AutomobileAddComponent implements OnInit {
           // }
 
           this._snackBar.open('Автомобиль успешно добавлен!');
-          this.router.navigate(['/automobiles']);
+          this.router.navigate(['/automobiles/' + automobileResponse.id]);
         },
         error: (errorResponse: HttpErrorResponse) => {
           if (errorResponse.error && errorResponse.error.message) {

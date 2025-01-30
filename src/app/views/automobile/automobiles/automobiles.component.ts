@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AutomobileResponseType} from "../../../../types/automobile-response.type";
 import {AutomobilesService} from "../../../shared/services/automobiles.service";
 import {ModelType} from "../../../../types/model.type";
+import {ModelsService} from "../../../shared/services/models.service";
 
 @Component({
   selector: 'app-automobiles',
@@ -14,7 +15,8 @@ export class AutomobilesComponent implements OnInit {
   models: ModelType[] = [];
   selectedCarModel: number = 1;
 
-  constructor(private automobilesService: AutomobilesService) { }
+  constructor(private automobilesService: AutomobilesService,
+              private modelsService: ModelsService) { }
 
   ngOnInit(): void {
     this.automobilesService.getAutomobiles()
@@ -22,7 +24,7 @@ export class AutomobilesComponent implements OnInit {
         this.automobiles = data;
       });
 
-    this.automobilesService.getModels()
+    this.modelsService.getModels()
       .subscribe((modelData: ModelType[]) => {
         this.models = modelData;
       });

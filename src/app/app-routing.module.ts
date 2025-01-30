@@ -11,6 +11,7 @@ const routes: Routes = [
       {path: '', component: MainComponent},
       {path: '', loadChildren: () => import('./views/user/user.module').then(m => m.UserModule)},
       {path: '', loadChildren: () => import('./views/automobile/automobile.module').then(m => m.AutomobileModule)},
+      {path: '', loadChildren: () => import('./views/models/models.module').then(m => m.ModelsModule)},
     ]
   }
 ];
