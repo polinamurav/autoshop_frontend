@@ -7,6 +7,7 @@ import { AutomobileAddComponent } from './automobile-add/automobile-add.componen
 import { AutomobileEditComponent } from './automobile-edit/automobile-edit.component';
 import { AutomobilesComponent } from './automobiles/automobiles.component';
 import {SharedModule} from "../../shared/shared.module";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -19,6 +20,8 @@ import {SharedModule} from "../../shared/shared.module";
   imports: [
     CommonModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     AutomobileRoutingModule
   ]
 })

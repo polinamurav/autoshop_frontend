@@ -2,45 +2,57 @@
 
   <h3 class="text-dark mb-4">Добавить</h3>
 
-<!--  <div th:if="${message}" class="alert alert-warning text-center" role="alert">-->
-<!--    <strong th:text="${message}"></strong>-->
-<!--  </div>-->
+  <!--  <div th:if="${message}" class="alert alert-warning text-center" role="alert">-->
+  <!--    <strong th:text="${message}"></strong>-->
+  <!--  </div>-->
 
   <div class="card shadow mb-3">
     <div class="card-body">
-      <form  enctype="multipart/form-data">
+      <form enctype="multipart/form-data" [formGroup]="addAutomobileForm">
         <div class="row">
           <div class="col-lg-6 col-12 mb-2">
-            <input type="text" required class="form-control" placeholder="Наименование"
-                   name="name">
+            <input type="text" class="form-control"
+                   [ngStyle]="{'border-color': addAutomobileForm.get('name')?.invalid
+                 && (addAutomobileForm.get('name')?.dirty || addAutomobileForm.get('name')?.touched) ? 'red' : '' }"
+                   placeholder="Наименование" formControlName="name">
           </div>
           <div class="col-lg-6 col-12 mb-2">
-            <input type="file" required class="form-control" name="photo" accept="image/*">
+            <input type="file" class="form-control"
+                   [ngStyle]="{'border-color': addAutomobileForm.get('photo')?.invalid
+                 && (addAutomobileForm.get('photo')?.dirty || addAutomobileForm.get('photo')?.touched) ? 'red' : '' }"
+                   accept="image/*" formControlName="photo">
           </div>
           <div class="col-lg-6 col-12 mb-2">
-            <input type="number" required class="form-control" placeholder="Цена"
-                   name="price" min="0.01" step="0.01">
+            <input type="number" class="form-control"
+                   [ngStyle]="{'border-color': addAutomobileForm.get('price')?.invalid
+                 && (addAutomobileForm.get('price')?.dirty || addAutomobileForm.get('price')?.touched) ? 'red' : '' }"
+                   placeholder="Цена" formControlName="price"
+                   min="0.01" step="0.01">
           </div>
           <div class="col-lg-6 col-12 mb-2">
-            <input type="text" required class="form-control" placeholder="Страна производства"
-                   name="origin">
+            <input type="text" class="form-control"
+                   [ngStyle]="{'border-color': addAutomobileForm.get('origin')?.invalid
+                 && (addAutomobileForm.get('origin')?.dirty || addAutomobileForm.get('origin')?.touched) ? 'red' : '' }"
+                   placeholder="Страна производства" formControlName="origin">
           </div>
           <div class="col-lg-6 col-12 mb-2">
-            <input type="number" required class="form-control" placeholder="Количество"
-                   name="count" min="1" step="1">
+            <input type="number" class="form-control"
+                   [ngStyle]="{'border-color': addAutomobileForm.get('count')?.invalid
+                 && (addAutomobileForm.get('count')?.dirty || addAutomobileForm.get('count')?.touched) ? 'red' : '' }"
+                   placeholder="Количество" formControlName="count" min="1" step="1">
           </div>
           <div class="col-lg-6 col-12 mb-2">
-            <select name="engineType" required class="form-select">
-<!--              <option th:each="i : ${engineTypes}" th:value="${i}" th:label="${i.name}"></option>-->
+            <select name="engineType" class="form-select" formControlName="engineType">
+              <option *ngFor="let engineType of engineTypes" [value]="engineType">{{ engineType }}</option>
             </select>
           </div>
           <div class="col-lg-6 col-12 mb-2">
-            <select name="carModelId" required class="form-select">
-<!--              <option th:each="i : ${carModels}" th:value="${i.id}" th:label="${i.name}"></option>-->
+            <select name="carModelId" class="form-select" formControlName="carModelId">
+              <option *ngFor="let model of models" [value]="model.id">{{ model.name }}</option>
             </select>
           </div>
           <div class="col">
-            <button class="btn btn-dark w-100" type="submit">Добавить</button>
+            <button class="btn btn-dark w-100" (click)="addAutomobile()">Добавить</button>
           </div>
         </div>
       </form>
