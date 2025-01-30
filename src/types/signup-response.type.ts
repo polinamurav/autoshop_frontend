@@ -1,6 +1,10 @@
+import {RoleTypeType} from "./role-type.type";
+
 export type SignupResponseType = {
-  id: number,
-  username: string,
+  id: string,
+  name: string,
+  username: string
   email: string,
-  password: string
+  phone: string,
+  roles?: RoleTypeType
 }

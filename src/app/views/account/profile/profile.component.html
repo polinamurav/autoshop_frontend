@@ -1,0 +1,40 @@
+<div class="container-fluid">
+
+  <h3 class="text-dark mb-4">Профиль</h3>
+
+  <div class="row">
+    <div class="col">
+      <div class="card shadow mb-3">
+        <div class="card-body">
+          <form [formGroup]="profileForm">
+            <div class="row">
+              <div class="col-lg col-12 mb-3">
+                <p class="fs-5 m-0">ФИО</p>
+                <input class="form-control" type="text"
+                       [ngStyle]="{'border-color': profileForm.get('name')?.invalid
+                 && (profileForm.get('name')?.dirty || profileForm.get('name')?.touched) ? 'red' : '' }"
+                       formControlName="name">
+              </div>
+              <div class="col-lg col-12 mb-3">
+                <p class="fs-5 m-0">Тел. номер (xxx-xx-xxx-xx-xx)</p>
+                <input class="form-control" type="tel"
+                       [ngStyle]="{'border-color': profileForm.get('phone')?.invalid
+                 && (profileForm.get('phone')?.dirty || profileForm.get('phone')?.touched) ? 'red' : '' }"
+                       formControlName="phone" name="tel">
+              </div>
+              <div class="col-lg col-12 mb-3">
+                <p class="fs-5 m-0">Электронная почта</p>
+                <input class="form-control" type="email"
+                       [ngStyle]="{'border-color': profileForm.get('email')?.invalid
+                 && (profileForm.get('email')?.dirty || profileForm.get('email')?.touched) ? 'red' : '' }"
+                       formControlName="email">
+              </div>
+            </div>
+            <button class="btn btn-dark w-100" type="button" (click)="updateProfile()">Обновить</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
