@@ -12,11 +12,9 @@
             <a routerLink="/automobiles" class="btn btn-secondary w-100">Сбросить</a>
           </div>
           <div class="col-12 col-lg mb-2">
-            <select name="carModelId" required class="form-select">
-              <option
-              ></option>
-<!--                <option th:each="i : ${models}" th:value="${i.id}" th:label="${i.name}"-->
-<!--                        th:selected="${i.id == carModelId}"></option>-->
+            <select name="carModelId" required class="form-select" [(ngModel)]="selectedCarModel">
+                <option *ngFor="let model of models" [value]="model.id">{{model.name}}</option>
+<!--              th:selected="${i.id == carModelId}"-->
             </select>
           </div>
           <div class="col-12 col-lg-auto mb-2">

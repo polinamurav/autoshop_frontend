@@ -47,7 +47,7 @@
             </select>
           </div>
           <div class="col-lg-6 col-12 mb-2">
-            <select name="carModelId" class="form-select" formControlName="carModelId">
+            <select name="carModelId" class="form-select" formControlName="carModelId" [(ngModel)]="selectedCarModel">
               <option *ngFor="let model of models" [value]="model.id">{{ model.name }}</option>
             </select>
           </div>

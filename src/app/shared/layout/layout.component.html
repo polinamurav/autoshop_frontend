@@ -2,9 +2,9 @@
 <!--<app-header-left [isLogged]="isLogged"></app-header-left>-->
 <!--<router-outlet></router-outlet>-->
 
-<div class="d-flex">
-  <app-header-left [isLogged]="isLogged"></app-header-left>
-  <div class="d-flex flex-column flex-grow-1" id="content-wrapper">
+<div class="d-flex vh-100 overflow-hidden">
+  <app-header-left [isLogged]="isLogged" class="h-100 flex-shrink-0 bg-light"></app-header-left>
+  <div class="d-flex flex-column flex-grow-1 h-100 overflow-auto" id="content-wrapper">
     <div id="content">
       <app-header-top [isLogged]="isLogged"></app-header-top>
       <div class="container-fluid">

@@ -20,6 +20,7 @@ export class AutomobileAddComponent implements OnInit {
   engineTypes = Object.values(EngineTypeType);
   automobiles: AutomobileResponseType[] = [];
   models: ModelType[] = [];
+  selectedCarModel: number = 1;
 
   addAutomobileForm = this.fb.group({
     name: ['', Validators.required],
