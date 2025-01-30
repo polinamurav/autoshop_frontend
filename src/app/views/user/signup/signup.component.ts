@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {SignupResponseType} from "../../../../types/signup-response.type";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-signup',
@@ -23,6 +24,7 @@ export class SignupComponent implements OnInit {
 
   constructor(private authService: AuthService,
               private fb: FormBuilder,
+              private _snackBar: MatSnackBar,
               private router: Router) { }
 
   ngOnInit(): void {
@@ -46,22 +48,19 @@ export class SignupComponent implements OnInit {
             }
 
             if (error) {
-              // this._snackBar.open(error);
+              this._snackBar.open(error);
               throw new Error(error);
             }
 
-            // this.authService.setToken(signupResponse.accessToken);
-            // this._snackBar.open('Вы успешно зарегистрировались');
-            alert('Вы успешно зарегистрировались');
+            this._snackBar.open('Вы успешно зарегистрировались');
             this.router.navigate(['/login']);
           },
           error: (errorResponse: HttpErrorResponse) => {
             if (errorResponse.error && errorResponse.error.message) {
-              // this._snackBar.open(errorResponse.error.message);
-              console.log(errorResponse.error.message);
+              this._snackBar.open(errorResponse.error.message);
+              // console.log(errorResponse.error.message);
             } else {
-              // this._snackBar.open('Ошибка регистрации');
-              console.log('Ошибка регистрации');
+              this._snackBar.open('Ошибка регистрации');
             }
           }
         })

@@ -8,6 +8,7 @@ import {EngineTypeType} from "../../../../types/engine-type.type";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ModelType} from "../../../../types/model.type";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-automobile-add',
@@ -34,6 +35,7 @@ export class AutomobileAddComponent implements OnInit {
   constructor(private router: Router,
               private automobilesService: AutomobilesService,
               private authService: AuthService,
+              private _snackBar: MatSnackBar,
               private fb: FormBuilder) {
 
   }
@@ -89,18 +91,15 @@ export class AutomobileAddComponent implements OnInit {
           //   throw new Error(error);
           // }
 
-          // this.authService.setToken(signupResponse.accessToken);
-          // this._snackBar.open('Вы успешно зарегистрировались');
-          alert('Автомобиль успешно добавлен!');
+          this._snackBar.open('Автомобиль успешно добавлен!');
           this.router.navigate(['/automobiles']);
         },
         error: (errorResponse: HttpErrorResponse) => {
           if (errorResponse.error && errorResponse.error.message) {
-            // this._snackBar.open(errorResponse.error.message);
-            console.log(errorResponse.error.message);
+            this._snackBar.open(errorResponse.error.message);
+            // console.log(errorResponse.error.message);
           } else {
-            // this._snackBar.open('Ошибка регистрации');
-            console.log('Ошибка добавления');
+            this._snackBar.open('Ошибка добавления');
           }
         }
       });

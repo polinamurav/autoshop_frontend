@@ -10,6 +10,8 @@ import { HeaderLeftComponent } from './shared/layout/header-left/header-left.com
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {SharedModule} from "./shared/shared.module";
 import {HttpClientModule} from "@angular/common/http";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -23,8 +25,10 @@ import {HttpClientModule} from "@angular/common/http";
     BrowserModule,
     HttpClientModule,
     SharedModule,
+    MatSnackBarModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
