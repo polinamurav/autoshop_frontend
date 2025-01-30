@@ -24,4 +24,8 @@ export class ModelsService {
   updateModel(value: ModelType): Observable<ModelType | DefaultResponseType> {
     return this.http.put<ModelType | DefaultResponseType>(environment.api + 'models/' + value.id + '/edit', value);
   }
+
+  deleteModel(value: ModelType): Observable<ModelType | DefaultResponseType> {
+    return this.http.delete<ModelType | DefaultResponseType>(environment.api + 'models/' + value.id + '/delete');
+  }
 }

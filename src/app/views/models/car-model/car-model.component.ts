@@ -85,8 +85,20 @@ export class CarModelComponent implements OnInit {
     });
   }
 
-  deleteModel(value: string) {
-    // th:href="${'/models/' + i.id + '/delete'}"
+  deleteModel(model: ModelType) {
+    this.modelsService.deleteModel(model).subscribe({
+      next: () => {
+        this.models = this.models.filter(m => m.id !== model.id);
+        this._snackBar.open('Модель успешно удалена!');
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        if (errorResponse.error && errorResponse.error.message) {
+          this._snackBar.open(errorResponse.error.message);
+        } else {
+          this._snackBar.open('Ошибка удаления');
+        }
+      }
+    });
   }
 
 }
