@@ -17,7 +17,7 @@ export class ProfileService {
     return this.http.get<SignupResponseType>(environment.api + 'profile/me');
   }
 
-  updateProfile(value: SignupResponseType): Observable<SignupResponseType | DefaultResponseType> {
+  updateProfile(value: { name?: string, phone?: string, email?: string }): Observable<SignupResponseType | DefaultResponseType> {
     return this.http.put<SignupResponseType | DefaultResponseType>(environment.api + 'profile/edit', value);
   }
 }
