@@ -55,6 +55,8 @@ export class CarModelComponent implements OnInit {
             throw new Error(error);
           }
 
+          this.models.push(modelResponse);
+          this.addModelForm.reset();
           this._snackBar.open('Модель успешно добавлен!');
           // this.router.navigate(['/models']);
         },
