@@ -1,1 +1,36 @@
-<p>users works!</p>
+<div class="container-fluid">
+
+  <h3 class="text-dark mb-4">Пользователи</h3>
+
+  <div class="card shadow mb-4" *ngIf="users && users.length > 0">
+    <div class="card-body">
+      <form *ngFor="let user of users" class="mb-2">
+        <div class="row">
+          <div class="col-lg col-12 mb-2">
+            <input type="text" readonly class="form-control" [value]="user.name">
+          </div>
+          <div class="col-lg col-12 mb-2">
+            <input type="text" readonly class="form-control" [value]="user.phone">
+          </div>
+          <div class="col-lg col-12 mb-2">
+            <input type="text" readonly class="form-control" [value]="user.email">
+          </div>
+          <div class="col-lg col-12 mb-2">
+            <select name="role" class="form-select" [(ngModel)]="userRole">
+              <option *ngFor="let role of RoleTypeTypes" [value]="role" [selected]="role">{{role}}</option>
+            </select>
+          </div>
+          <div class="col-lg-auto col-12 mb-2">
+            <button class="btn btn-dark w-100" type="button" (click)="updateRole()">Обновить</button>
+          </div>
+          <div class="col-lg-auto col-12 mb-2">
+            <button (click)="deleteUser()" class="btn btn-danger w-100">Удалить</button>
+          </div>
+        </div>
+        <hr>
+      </form>
+    </div>
+  </div>
+
+</div>
+<a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
