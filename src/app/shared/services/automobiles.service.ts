@@ -25,4 +25,8 @@ export class AutomobilesService {
   addAutomobile(formData: FormData): Observable<AutomobileResponseType | DefaultResponseType> {
     return this.http.post<AutomobileResponseType | DefaultResponseType>(environment.api + 'automobiles/add', formData)
   }
+
+  searchAutomobile(name: string): Observable<AutomobileResponseType[]> {
+    return this.http.get<AutomobileResponseType[]>(environment.api + 'automobiles/searchAuto?name=' + name);
+  }
 }

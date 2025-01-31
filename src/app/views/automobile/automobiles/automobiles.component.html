@@ -2,37 +2,36 @@
 
   <h3 class="text-dark mb-4">Автомобили</h3>
 
-  <a routerLink="/automobiles/add" class="btn btn-dark w-100 mb-3">Добавить</a>
-
-  <div class="card shadow mb-3">
-    <div class="card-body">
-      <form action="/automobiles/search" method="get">
-        <div class="row">
-          <div class="col-12 col-lg-auto mb-2">
-            <a routerLink="/automobiles" class="btn btn-secondary w-100">Сбросить</a>
-          </div>
-          <div class="col-12 col-lg mb-2">
-            <select name="carModelId" required class="form-select" [(ngModel)]="selectedCarModel">
-                <option *ngFor="let model of models" [value]="model.id">{{model.name}}</option>
-<!--              th:selected="${i.id == carModelId}"-->
-            </select>
-          </div>
-          <div class="col-12 col-lg-auto mb-2">
-            <button class="btn btn-primary w-100" type="submit">Поиск</button>
-          </div>
-        </div>
-      </form>
+  <div class="d-flex justify-content-evenly header-actions">
+    <a routerLink="/automobiles/add" class="header-add btn btn-dark">Добавить</a>
+    <div class="header-bottom-search">
+      <input type="text" placeholder="Начните искать" [formControl]="searchField">
     </div>
   </div>
 
+<!--  <div class="card shadow mb-3">-->
+<!--    <div class="card-body">-->
+<!--      <div class="header-bottom-search">-->
+<!--        <input type="text" placeholder="Начните искать" [formControl]="searchField">-->
+
+<!--        &lt;!&ndash;        <div class="search-products" *ngIf="showedSearch && automobiles && automobiles.length > 0">&ndash;&gt;-->
+<!--        &lt;!&ndash;          <div class="search-product" *ngFor="let automobile of automobiles" (click)="selectAutomobile(automobile.id)">&ndash;&gt;-->
+<!--        &lt;!&ndash;            <div class="search-product-image" style="background-image: url({{automobile.photo}})"></div>&ndash;&gt;-->
+<!--        &lt;!&ndash;            <div class="search-product-name">{{automobile.name}}</div>&ndash;&gt;-->
+<!--        &lt;!&ndash;          </div>&ndash;&gt;-->
+<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+
   <div class="row" *ngIf="automobiles && automobiles.length > 0">
-    <div  class="col-12 col-lg-4 mb-3" *ngFor="let automobile of automobiles">
+    <div class="col-12 col-lg-4 mb-3" *ngFor="let automobile of automobiles">
       <div class="card shadow">
         <div class="card-body">
           <div class="row">
             <div class="col-lg-5 col-12 text-center">
               <a [routerLink]="'/automobiles/' + automobile.id">
-                <img [src]="automobile.photo"class="rounded-3 shadow"
+                <img [src]="automobile.photo" class="rounded-3 shadow"
                      style="max-height: 250px;max-width: 100%">
               </a>
             </div>

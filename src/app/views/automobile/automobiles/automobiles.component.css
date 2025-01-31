@@ -1,0 +1,93 @@
+.header-bottom-search {
+  position: relative;
+  display: inline;
+}
+
+.header-bottom-search input {
+  border: 1px solid #343a40;
+  border-radius: 30px;
+  padding: 10px 10px 10px 43px;
+  width: 400px;
+  height: 41px;
+  box-sizing: border-box;
+  font-size: 16px;
+  color: #343a40;
+  outline: none;
+}
+
+.header-add {
+  width: 400px;
+  height: 41px;
+  border-radius: 30px;
+}
+
+.header-actions {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #343a40;
+  margin-bottom: 15px;
+  padding-top: 20px;
+  border-top: 1px solid #343a40;
+  margin-top: 15px;
+}
+
+.header-bottom-search input::after {
+  content: "";
+  /*background-image: url("../../../../assets/images/icons/search.png");*/
+  background-size: cover;
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 15px;
+  top: 11px;
+}
+
+.search-products {
+  position: absolute;
+  right: 0;
+  top: 61px;
+  width: 400px;
+  background-color: #ffffff;
+  border-radius: 5px;
+  border: 1px solid #EBEBEB;
+}
+
+.search-product {
+  padding: 12px 23px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.search-product:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.search-product:last-child {
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+.search-product-image {
+  border-radius: 5px;
+  width: 40px;
+  height: 40px;
+  margin-right: 25px;
+  background-position: center;
+  background-size: cover;
+}
+
+.search-product-name {
+  color: #8E8E8E;
+  font-size: 16px;
+  line-height: 130%;
+}
+
+.search-product:hover {
+  background-color: #EBEBEB;
+}
+
+.search-product:hover .search-product-name {
+  color: #000000;
+}
