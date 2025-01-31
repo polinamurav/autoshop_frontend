@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {SignupResponseType} from "../../../types/signup-response.type";
 import {environment} from "../../../environments/environment";
+import {DefaultResponseType} from "../../../types/default-response.type";
 
 @Injectable({
   providedIn: 'root'
@@ -13,5 +14,12 @@ export class UserService {
 
   getUsers(): Observable<SignupResponseType[]> {
     return this.http.get<SignupResponseType[]>(environment.api + 'users');
+  }
+
+  updateUser(user: SignupResponseType): Observable<SignupResponseType | DefaultResponseType> {
+    return this.http.put<SignupResponseType | DefaultResponseType>(
+      `${environment.api}users/editRole/${user.id}?roleName=${encodeURIComponent(user.roles?.[0].name || '')}`,
+      {}
+    );
   }
 }

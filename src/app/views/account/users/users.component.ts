@@ -3,6 +3,9 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {SignupResponseType} from "../../../../types/signup-response.type";
 import {UserService} from "../../../shared/services/user.service";
 import {RoleTypeType} from "../../../../types/role-type.type";
+import {AutomobileResponseType} from "../../../../types/automobile-response.type";
+import {ActivatedRoute} from "@angular/router";
+import {DefaultResponseType} from "../../../../types/default-response.type";
 
 @Component({
   selector: 'app-users',
@@ -16,7 +19,8 @@ export class UsersComponent implements OnInit {
   RoleTypeTypes = Object.values(RoleTypeType);
 
   constructor(private userService: UserService,
-              private _snackBar: MatSnackBar) {
+              private _snackBar: MatSnackBar,
+              private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
@@ -26,11 +30,23 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  updateRole() {
+  updateRole(user: SignupResponseType) {
+    this.userService.updateUser(user).subscribe(
+      (data: SignupResponseType | DefaultResponseType) => {
+        if ((data as DefaultResponseType).status === 400) {
+          this._snackBar.open((data as DefaultResponseType).message);
+          return;
+        }
 
+        this._snackBar.open('Роль пользователя успешно изменена!');
+      },
+      error => {
+        this._snackBar.open('Ошибка при обновлении роли!');
+      }
+    );
   }
 
-  deleteUser() {
+  deleteUser(userId: string) {
 
   }
 

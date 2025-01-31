@@ -15,16 +15,25 @@
           <div class="col-lg col-12 mb-2">
             <input type="text" readonly class="form-control" [value]="user.email">
           </div>
-          <div class="col-lg col-12 mb-2">
-            <select name="role" class="form-select" [(ngModel)]="userRole">
-              <option *ngFor="let role of RoleTypeTypes" [value]="role" [selected]="role">{{role}}</option>
+          <div class="col-lg col-12 mb-2" *ngFor="let role of user.roles">
+<!--            <select name="role" class="form-select" [(ngModel)]="userRole">-->
+<!--              <option *ngFor="let role of RoleTypeTypes" [value]="userRole" [selected]="role">{{role}}</option>-->
+<!--            </select>-->
+<!--            <select name="role" class="form-select" [(ngModel)]="userRole" [ngModelOptions]="{standalone: true}">-->
+<!--              <option *ngFor="let role of RoleTypeTypes" [value]="role">{{ role }}</option>-->
+<!--            </select>-->
+<!--            <select name="role" class="form-select">-->
+<!--              <option *ngFor="let role of user.roles" [value]="role.name">{{ role.name }}</option>-->
+<!--            </select>-->
+            <select name="role" class="form-select" [(ngModel)]="user.roles![0].name">
+              <option *ngFor="let roleUserType of RoleTypeTypes" [value]="roleUserType">{{ roleUserType }}</option>
             </select>
           </div>
           <div class="col-lg-auto col-12 mb-2">
-            <button class="btn btn-dark w-100" type="button" (click)="updateRole()">Обновить</button>
+            <button class="btn btn-dark w-100" type="button" (click)="updateRole(user)">Обновить</button>
           </div>
           <div class="col-lg-auto col-12 mb-2">
-            <button (click)="deleteUser()" class="btn btn-danger w-100">Удалить</button>
+            <button (click)="deleteUser(user.id)" class="btn btn-danger w-100">Удалить</button>
           </div>
         </div>
         <hr>

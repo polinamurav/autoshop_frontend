@@ -5,6 +5,7 @@ import {LoginResponseType} from "../../../../types/login-response.type";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {FormBuilder, Validators} from "@angular/forms";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private authService: AuthService,
-              // private _snackBar: MatSnackBar,
+              private _snackBar: MatSnackBar,
               private router: Router) { }
   ngOnInit(): void {
   }
@@ -41,23 +42,19 @@ export class LoginComponent implements OnInit {
             }
 
             if (error) {
-              // this._snackBar.open(error);
+              this._snackBar.open(error);
               throw new Error(error);
             }
 
-            // set tokens
             this.authService.setToken(loginResponse.token);
-            // this._snackBar.open('Вы успешно авторизовались');
-            alert('Вы успешно авторизировались');
+            this._snackBar.open('Вы успешно авторизовались');
             this.router.navigate(['/']);
           },
           error: (errorResponse: HttpErrorResponse) => {
             if (errorResponse.error && errorResponse.error.message) {
-              // this._snackBar.open(errorResponse.error.message);
-              console.log(errorResponse.error.message);
+              this._snackBar.open(errorResponse.error.message);
             } else {
-              // this._snackBar.open('Ошибка авторизации');
-              console.log('Ошибка авторизации');
+              this._snackBar.open('Ошибка авторизации');
             }
           }
         })
