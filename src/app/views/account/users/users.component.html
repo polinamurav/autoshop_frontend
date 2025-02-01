@@ -15,8 +15,8 @@
           <div class="col-lg col-12 mb-2">
             <input type="text" readonly class="form-control" [value]="user.email">
           </div>
-          <div class="col-lg col-12 mb-2" *ngFor="let role of user.roles">
-            <select name="role" class="form-select" [(ngModel)]="user.roles![0].name">
+          <div class="col-lg col-12 mb-2">
+            <select name="role" class="form-select" [(ngModel)]="user.roles">
               <option *ngFor="let roleUserType of RoleTypeTypes" [value]="roleUserType">{{ roleUserType }}</option>
             </select>
           </div>

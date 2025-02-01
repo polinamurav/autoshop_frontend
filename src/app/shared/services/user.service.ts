@@ -4,7 +4,6 @@ import {Observable} from "rxjs";
 import {SignupResponseType} from "../../../types/signup-response.type";
 import {environment} from "../../../environments/environment";
 import {DefaultResponseType} from "../../../types/default-response.type";
-import {ModelType} from "../../../types/model.type";
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +18,7 @@ export class UserService {
 
   updateUser(user: SignupResponseType): Observable<SignupResponseType | DefaultResponseType> {
     return this.http.put<SignupResponseType | DefaultResponseType>(
-      `${environment.api}users/editRole/${user.id}?roleName=${encodeURIComponent(user.roles?.[0].name || '')}`,
+      `${environment.api}users/editRole/${user.id}?roleName=${user.roles}`,
       {}
     );
   }

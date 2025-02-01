@@ -6,8 +6,5 @@ export type SignupResponseType = {
   username: string
   email: string,
   phone: string,
-  roles?: {
-    id: number,
-    name: RoleTypeType
-  }[]
+  roles?: RoleTypeType
 }
