@@ -29,7 +29,6 @@ export class AutomobileAddComponent implements OnInit {
     origin: ['', Validators.required],
     count: ['', Validators.required],
     engineType: [EngineTypeType.DIESEL, Validators.required],
-    // email: ['', [Validators.required, Validators.email]],
     carModelId: [''],
     photo: ['']
   })
@@ -61,7 +60,6 @@ export class AutomobileAddComponent implements OnInit {
         engineType: this.addAutomobileForm.value.engineType,
         carModelId: this.addAutomobileForm.value.carModelId,
       }));
-
 
       const fileInput = (document.querySelector('[formControlName="photo"]') as HTMLInputElement).files;
       if (fileInput && fileInput[0]) {

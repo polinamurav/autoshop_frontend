@@ -3,9 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {AutomobileResponseType} from "../../../types/automobile-response.type";
 import {environment} from "../../../environments/environment";
-import {AutomobileType} from "../../../types/automobile.type";
 import {DefaultResponseType} from "../../../types/default-response.type";
-import {ModelType} from "../../../types/model.type";
 
 @Injectable({
   providedIn: 'root'
@@ -28,5 +26,9 @@ export class AutomobilesService {
 
   searchAutomobile(name: string): Observable<AutomobileResponseType[]> {
     return this.http.get<AutomobileResponseType[]>(environment.api + 'automobiles/searchAuto?name=' + name);
+  }
+
+  updateAutomobile(id: string, updatedData: FormData):Observable<AutomobileResponseType | DefaultResponseType>  {
+    return this.http.put<AutomobileResponseType | DefaultResponseType>(environment.api + 'automobiles/' + id + '/edit', updatedData);
   }
 }

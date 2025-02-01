@@ -14,7 +14,7 @@ export type AutomobileResponseType = {
   // },
   carModelId: number,
   carModelName: string,
-  applications: [],
-  incomePrice: number,
-  incomeCount: number
+  applications?: [],
+  incomePrice?: number,
+  incomeCount?: number
 }

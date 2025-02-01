@@ -8,42 +8,48 @@
 
   <div class="card shadow mb-3">
     <div class="card-body">
-      <form th:action="${'/automobiles/' + automobile.id + '/edit'}" method="post"
-            enctype="multipart/form-data">
+      <form [formGroup]="automobileForm" enctype="multipart/form-data">
         <div class="row">
           <div class="col-lg-6 col-12 mb-2">
-            <input type="text" required class="form-control" placeholder="Наименование"
-                   name="name" th:value="${automobile.name}">
+            <input type="text" class="form-control"
+                   [ngStyle]="{'border-color': automobileForm.get('name')?.invalid
+                 && (automobileForm.get('name')?.dirty || automobileForm.get('name')?.touched) ? 'red' : '' }"
+                   placeholder="Наименование" formControlName="name">
           </div>
           <div class="col-lg-6 col-12 mb-2">
-            <input type="file" class="form-control" name="photo" accept="image/*">
+            <input type="file" class="form-control" accept="image/*" formControlName="photo">
           </div>
           <div class="col-lg-6 col-12 mb-2">
-            <input type="number" required class="form-control" placeholder="Цена"
-                   name="price" min="0.01" step="0.01" th:value="${automobile.price}">
+            <input type="number" class="form-control" placeholder="Цена"
+                   [ngStyle]="{'border-color': automobileForm.get('price')?.invalid
+                 && (automobileForm.get('price')?.dirty || automobileForm.get('price')?.touched) ? 'red' : '' }"
+                   formControlName="price" min="0.01" step="0.01">
           </div>
           <div class="col-lg-6 col-12 mb-2">
-            <input type="text" required class="form-control" placeholder="Страна производства"
-                   name="origin" th:value="${automobile.origin}">
+            <input type="text" class="form-control"
+                   [ngStyle]="{'border-color': automobileForm.get('origin')?.invalid
+                 && (automobileForm.get('origin')?.dirty || automobileForm.get('origin')?.touched) ? 'red' : '' }"
+                   placeholder="Страна производства" formControlName="origin">
           </div>
           <div class="col-lg-6 col-12 mb-2">
-            <input type="number" required class="form-control" placeholder="Количество"
-                   name="count" min="1" step="1" th:value="${automobile.count}">
+            <input type="number" class="form-control"
+                   [ngStyle]="{'border-color': automobileForm.get('count')?.invalid
+                 && (automobileForm.get('count')?.dirty || automobileForm.get('count')?.touched) ? 'red' : '' }"
+                   placeholder="Количество" formControlName="count" min="1" step="1">
           </div>
           <div class="col-lg-6 col-12 mb-2">
-            <select name="engineType" required class="form-select">
-              <option th:each="i : ${engineTypes}" th:value="${i}"
-                      th:label="${i.name}" th:selected="${i == automobile.engineType}"></option>
+            <select name="engineType" class="form-select" formControlName="engineType">
+              <option *ngFor="let engineType of engineTypes" [value]="engineType">{{ engineType }}</option>
             </select>
           </div>
           <div class="col-lg-6 col-12 mb-2">
-            <select name="carModelId" required class="form-select">
-              <option th:each="i : ${carModels}" th:value="${i.id}"
-                      th:label="${i.name}" th:selected="${i.id == automobile.carModel.id}"></option>
+            <select name="carModelId" class="form-select" formControlName="carModelId">
+<!--              [(ngModel)]="selectedCarModel"-->
+              <option *ngFor="let model of models" [value]="model.id">{{ model.name }}</option>
             </select>
           </div>
           <div class="col">
-            <button class="btn btn-dark w-100" type="submit">Обновить</button>
+            <button class="btn btn-dark w-100" type="button" (click)="updateAuto()">Обновить</button>
           </div>
         </div>
       </form>
