@@ -3,9 +3,10 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {SignupResponseType} from "../../../../types/signup-response.type";
 import {UserService} from "../../../shared/services/user.service";
 import {RoleTypeType} from "../../../../types/role-type.type";
-import {AutomobileResponseType} from "../../../../types/automobile-response.type";
 import {ActivatedRoute} from "@angular/router";
 import {DefaultResponseType} from "../../../../types/default-response.type";
+import {ModelType} from "../../../../types/model.type";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-users',
@@ -47,7 +48,18 @@ export class UsersComponent implements OnInit {
   }
 
   deleteUser(userId: string) {
-
+    this.userService.deleteUser(userId).subscribe({
+      next: () => {
+        this.users = this.users.filter(m => m.id !== userId);
+        this._snackBar.open('Пользователь успешно удален!');
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        if (errorResponse.error && errorResponse.error.message) {
+          this._snackBar.open(errorResponse.error.message);
+        } else {
+          this._snackBar.open('Ошибка удаления');
+        }
+      }
+    })
   }
-
 }
