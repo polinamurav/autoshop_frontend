@@ -12,7 +12,7 @@
                style="max-height: 400px;max-width: 100%">
         </div>
         <div class="col">
-          <div class="row mb-3">
+          <div *ngIf="isAdmin" class="row mb-3">
             <div class="col-lg-auto col-12 mb-2">
               <a [routerLink]="'/automobiles/' + automobile.id + '/edit'"
                  class="btn btn-dark w-100">Обновить</a>
@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="row mb-3">
-            <div class="col-lg-4 col">
+            <div *ngIf="!isAdmin" class="col-lg-4 col">
               <a
                  class="btn btn-dark w-100">Оформить</a>
             </div>

@@ -9,9 +9,9 @@
     <ul class="navbar-nav text-light" id="accordionSidebar">
       <li class="nav-item"><a class="nav-link" routerLink="/"><span>Главная страница</span></a></li>
       <li class="nav-item" *ngIf="isLogged"><a class="nav-link" routerLink="/profile"><span>Профиль</span></a></li>
-      <li class="nav-item" *ngIf="isLogged"><a class="nav-link" href="/users"><span>Пользователи</span></a></li>
-      <li class="nav-item" *ngIf="isLogged"><a class="nav-link" routerLink="/models"><span>Модели</span></a></li>
-      <li class="nav-item" *ngIf="isLogged"><a class="nav-link" routerLink="/stats"><span>Статистика</span></a></li>
+      <li class="nav-item" *ngIf="isLogged && isAdmin"><a class="nav-link" href="/users"><span>Пользователи</span></a></li>
+      <li class="nav-item" *ngIf="isLogged && isAdmin"><a class="nav-link" routerLink="/models"><span>Модели</span></a></li>
+      <li class="nav-item" *ngIf="isLogged && isAdmin"><a class="nav-link" routerLink="/stats"><span>Статистика</span></a></li>
       <li class="nav-item"><a class="nav-link" routerLink="/automobiles"><span>Автомобили</span></a></li>
       <li class="nav-item" *ngIf="isLogged"><a class="nav-link" routerLink="/applications"><span>Заявки</span></a></li>
     </ul>

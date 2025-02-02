@@ -3,7 +3,7 @@
   <h3 class="text-dark mb-4">Автомобили</h3>
 
   <div class="d-flex justify-content-evenly header-actions">
-    <a routerLink="/automobiles/add" class="header-add btn btn-dark">Добавить</a>
+    <a *ngIf="isAdmin" routerLink="/automobiles/add" class="header-add btn btn-dark">Добавить</a>
     <div class="header-bottom-search">
       <input type="text" placeholder="Начните искать" [formControl]="searchField">
     </div>

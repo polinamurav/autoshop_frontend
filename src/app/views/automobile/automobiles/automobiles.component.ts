@@ -6,6 +6,7 @@ import {ModelsService} from "../../../shared/services/models.service";
 import {FormControl} from "@angular/forms";
 import {debounceTime} from "rxjs";
 import {Router} from "@angular/router";
+import {AuthService} from "../../../core/auth/auth.service";
 
 @Component({
   selector: 'app-automobiles',
@@ -17,12 +18,20 @@ export class AutomobilesComponent implements OnInit {
   searchField = new FormControl();
   automobiles: AutomobileResponseType[] = [];
   models: ModelType[] = [];
+  isAdmin: boolean = false;
 
   constructor(private automobilesService: AutomobilesService,
+              private authService: AuthService,
               private modelsService: ModelsService,
-              private router: Router) { }
+              private router: Router) {
+    this.isAdmin = this.authService.getIsAdminIn();
+  }
 
   ngOnInit(): void {
+    this.authService.isAdmin$.subscribe((isAdminIn: boolean) => {
+      this.isAdmin = isAdminIn;
+    });
+
     this.automobilesService.getAutomobiles()
       .subscribe((data: AutomobileResponseType[]) => {
         this.automobiles = data;

@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {SignupResponseType} from "../../../types/signup-response.type";
 import {DefaultResponseType} from "../../../types/default-response.type";
 import {LoginResponseType} from "../../../types/login-response.type";
+import {RoleTypeType} from "../../../types/role-type.type";
 
 @Injectable({
   providedIn: 'root'
@@ -12,13 +13,23 @@ import {LoginResponseType} from "../../../types/login-response.type";
 export class AuthService {
 
   public accessTokenKey: string = 'Token';
+  public userRoleKey: string = 'roles';
   public isLogged$: Subject<boolean> = new Subject<boolean>();
   private isLogged: boolean = false;
 
-  constructor(private http: HttpClient) {
-    this.isLogged = !!localStorage.getItem(this.accessTokenKey)
-  }
+  // public isAdmin$: Subject<boolean> = new Subject<boolean>();
+  public isAdmin$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private isAdmin: boolean = false;
 
+  constructor(private http: HttpClient) {
+    this.isLogged = !!localStorage.getItem(this.accessTokenKey);
+
+    const storedRole = localStorage.getItem(this.userRoleKey);
+    this.isAdmin = storedRole === 'ROLE_ADMIN';
+
+    this.isLogged$.next(this.isLogged);
+    this.isAdmin$.next(this.isAdmin);
+  }
 
   login(username: string, password: string): Observable<LoginResponseType | DefaultResponseType> {
     return this.http.post<LoginResponseType | DefaultResponseType>(environment.api + 'auth', {
@@ -33,26 +44,51 @@ export class AuthService {
   }
 
   public getIsLoggedIn() {
-    return this.isLogged;
+    return this.isLogged
   }
 
-  public setToken(accessToken: string): void {
+  public getIsAdminIn() {
+    return this.isAdmin
+  }
+
+  public setToken(accessToken: string, userRole: string): void {
     localStorage.setItem(this.accessTokenKey, accessToken);
+    localStorage.setItem(this.userRoleKey, userRole)
+
     this.isLogged = true;
+    this.isAdmin = userRole === 'ROLE_ADMIN';
+
     this.isLogged$.next(true);
+    this.isAdmin$.next(this.isAdmin);
+  }
+
+  public updateUserRole(userRole: string): void {
+    localStorage.setItem(this.userRoleKey, userRole);
+    this.isAdmin = userRole === 'ROLE_ADMIN';
+    this.isAdmin$.next(this.isAdmin);
   }
 
   public removeToken(): void {
     localStorage.removeItem(this.accessTokenKey);
+    localStorage.removeItem(this.userRoleKey);
     this.isLogged = false;
     this.isLogged$.next(false);
+
+    this.isAdmin = false;
+    this.isAdmin$.next(false);
+  }
+
+  public getUserRole(): { roles: RoleTypeType | null } {
+    return {
+      roles: localStorage.getItem(this.userRoleKey) as RoleTypeType | null
+    }
   }
 
   // logout(): void {
   //   this.removeToken();
   // }
 
-  public getToken(): {accessToken: string | null} {
+  public getToken(): { accessToken: string | null } {
     return {
       accessToken: localStorage.getItem(this.accessTokenKey),
     }
