@@ -1,4 +1,5 @@
 import {EngineTypeType} from "./engine-type.type";
+import {ApplicationResponseType} from "./application-response.type";
 
 export type AutomobileResponseType = {
   id: string,
@@ -8,13 +9,9 @@ export type AutomobileResponseType = {
   origin: string,
   count: number,
   engineType: EngineTypeType,
-  // carModel: {
-  //   id: string,
-  //   name: string
-  // },
   carModelId: number,
   carModelName: string,
-  applications?: [],
+  applications?: ApplicationResponseType[],
   incomePrice?: number,
   incomeCount?: number
 
