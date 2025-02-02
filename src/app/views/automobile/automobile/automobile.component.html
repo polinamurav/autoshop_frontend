@@ -24,7 +24,7 @@
           </div>
           <div class="row mb-3">
             <div *ngIf="!isAdmin" class="col-lg-4 col">
-              <a
+              <a (click)="makeAppointment(automobile.id)"
                  class="btn btn-dark w-100">Оформить</a>
             </div>
           </div>

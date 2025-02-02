@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthService} from "../../../core/auth/auth.service";
+import {ApplicationService} from "../../../shared/services/application.service";
 
 @Component({
   selector: 'app-automobile',
@@ -18,6 +19,7 @@ export class AutomobileComponent implements OnInit {
 
   constructor(private automobileService: AutomobilesService,
               private authService: AuthService,
+              private applicationService: ApplicationService,
               private activatedRoute: ActivatedRoute,
               private router: Router,
               private _snackBar: MatSnackBar) {
@@ -37,8 +39,8 @@ export class AutomobileComponent implements OnInit {
     });
   }
 
-  deleteAuto(userId: string) {
-    this.automobileService.deleteAutomobile(userId).subscribe({
+  deleteAuto(autoId: string) {
+    this.automobileService.deleteAutomobile(autoId).subscribe({
       next: () => {
         this.router.navigate(['/automobiles']);
         this._snackBar.open('Автомобиль успешно удален!');
@@ -48,6 +50,22 @@ export class AutomobileComponent implements OnInit {
           this._snackBar.open(errorResponse.error.message);
         } else {
           this._snackBar.open('Ошибка удаления');
+        }
+      }
+    })
+  }
+
+  makeAppointment(autoId: string) {
+    this.applicationService.getUserApplication(autoId).subscribe({
+      next: () => {
+        this.router.navigate(['/applications']);
+        this._snackBar.open('Заявка успешно добавлена!');
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        if (errorResponse.error && errorResponse.error.message) {
+          this._snackBar.open(errorResponse.error.message);
+        } else {
+          this._snackBar.open('Ошибка добавления');
         }
       }
     })
