@@ -1,0 +1,71 @@
+<div class="container-fluid">
+
+  <h3 class="text-dark mb-4">Статистика</h3>
+
+  <div class="card shadow mb-3">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg col-12 mb-2">
+          <a routerLink="/stats" class="btn btn-dark w-100">Назад</a>
+        </div>
+        <div class="col-lg col-12 mb-2">
+          <button class="btn btn-dark w-100" onclick="generatePDF()">Сгенерировать PDF</button>
+        </div>
+      </div>
+      <hr>
+      <div #generatePDF class="text-dark">
+        <p class="fs-4 text-center">Общая прибыль: {{ income }}</p>
+        <hr>
+        <div class="w-50" id="top5Count" style="height: 400px"></div>
+        <hr>
+        <div class="w-50" id="top5Income" style="height: 400px"></div>
+        <hr>
+        <div class="w-50" id="drawMod" style="height: 400px"></div>
+        <hr>
+        <div class="row mb-2 text-center">
+          <div class="col">
+            <span class="fs-5">Автомобиль</span>
+          </div>
+          <div class="col">
+            <span class="fs-5">Модель</span>
+          </div>
+          <div class="col">
+            <span class="fs-5">В автосалоне</span>
+          </div>
+          <div class="col">
+            <span class="fs-5">Продано</span>
+          </div>
+          <div class="col">
+            <span class="fs-5">Прибыль</span>
+          </div>
+        </div>
+        <div *ngFor="let car of top5String; let i = index" class="row mb-2">
+          <div class="col text-center">{{ car }}</div>
+          <div class="col text-center">{{ modString[i] }}</div>
+          <div class="col text-end">{{ countInt[i] }}</div>
+          <div class="col text-end">{{ top5Float[i] }}</div>
+          <div class="col text-end">{{ modFloat[i] }}</div>
+        </div>
+<!--        <div th:each="i : ${automobiles}" class="row mb-2">-->
+<!--          <div class="col text-center">-->
+<!--            <span th:text="${i.name}"></span>-->
+<!--          </div>-->
+<!--          <div class="col text-center">-->
+<!--            <span th:text="${i.carModel.name}"></span>-->
+<!--          </div>-->
+<!--          <div class="col text-end">-->
+<!--            <span th:text="${i.count}"></span>-->
+<!--          </div>-->
+<!--          <div class="col text-end">-->
+<!--            <span th:text="${i.incomeCount}"></span>-->
+<!--          </div>-->
+<!--          <div class="col text-end">-->
+<!--            <span th:text="${i.incomePrice}"></span>-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+    </div>
+  </div>
+
+</div>
+<a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
