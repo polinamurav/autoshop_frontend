@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {AutomobileResponseType} from "../../../types/automobile-response.type";
 import {environment} from "../../../environments/environment";
 import {DefaultResponseType} from "../../../types/default-response.type";
+import {SignupResponseType} from "../../../types/signup-response.type";
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +31,9 @@ export class AutomobilesService {
 
   updateAutomobile(id: string, updatedData: FormData):Observable<AutomobileResponseType | DefaultResponseType>  {
     return this.http.put<AutomobileResponseType | DefaultResponseType>(environment.api + 'automobiles/' + id + '/edit', updatedData);
+  }
+
+  deleteAutomobile(id: string): Observable<AutomobileResponseType | DefaultResponseType> {
+    return this.http.delete<AutomobileResponseType | DefaultResponseType>(environment.api + 'automobiles/' + id + '/delete');
   }
 }

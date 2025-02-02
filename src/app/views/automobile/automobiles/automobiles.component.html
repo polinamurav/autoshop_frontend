@@ -9,20 +9,9 @@
     </div>
   </div>
 
-<!--  <div class="card shadow mb-3">-->
-<!--    <div class="card-body">-->
-<!--      <div class="header-bottom-search">-->
-<!--        <input type="text" placeholder="Начните искать" [formControl]="searchField">-->
-
-<!--        &lt;!&ndash;        <div class="search-products" *ngIf="showedSearch && automobiles && automobiles.length > 0">&ndash;&gt;-->
-<!--        &lt;!&ndash;          <div class="search-product" *ngFor="let automobile of automobiles" (click)="selectAutomobile(automobile.id)">&ndash;&gt;-->
-<!--        &lt;!&ndash;            <div class="search-product-image" style="background-image: url({{automobile.photo}})"></div>&ndash;&gt;-->
-<!--        &lt;!&ndash;            <div class="search-product-name">{{automobile.name}}</div>&ndash;&gt;-->
-<!--        &lt;!&ndash;          </div>&ndash;&gt;-->
-<!--        &lt;!&ndash;        </div>&ndash;&gt;-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+  <div *ngIf="automobiles.length === 0" class="alert alert-warning text-center" role="alert">
+    <strong>Ничего не найдено!</strong>
+  </div>
 
   <div class="row" *ngIf="automobiles && automobiles.length > 0">
     <div class="col-12 col-lg-4 mb-3" *ngFor="let automobile of automobiles">
