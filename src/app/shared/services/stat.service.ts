@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {environment} from "../../../environments/environment";
 import {StatResponseType} from "../../../types/stat-response.type";
 import {StatAllResponseType} from "../../../types/stat-all-response.type";
+import {AutomobileResponseType} from "../../../types/automobile-response.type";
 
 @Injectable({
   providedIn: 'root'
@@ -18,5 +19,9 @@ export class StatService {
 
   getStatAll(): Observable<StatAllResponseType> {
     return this.http.get<StatAllResponseType>(environment.api + 'stats/all');
+  }
+
+  getStatIncome(): Observable<AutomobileResponseType[]> {
+    return this.http.get<AutomobileResponseType[]>(environment.api + 'stats/income');
   }
 }

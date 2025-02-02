@@ -83,9 +83,9 @@ export class StatAllComponent implements OnInit {
     chart.draw(data, options);
   }
 
-  generatePDF(): void {
-    if (this.pdfContent) {
-      (html2pdf as any).from(this.pdfContent.nativeElement).save();
-    }
-  }
+  // generatePDF(): void {
+  //   if (this.pdfContent) {
+  //     (html2pdf as any).from(this.pdfContent.nativeElement).save();
+  //   }
+  // }
 }
