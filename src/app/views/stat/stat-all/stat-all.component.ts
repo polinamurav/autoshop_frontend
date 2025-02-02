@@ -1,7 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import * as html2pdf from 'html2pdf.js';
 import { StatAllResponseType } from "../../../../types/stat-all-response.type";
 import { StatService } from "../../../shared/services/stat.service";
+import html2pdf from "html2pdf.js";
+import {StatResponseType} from "../../../../types/stat-response.type";
 
 declare var google: any;
 
@@ -15,6 +16,7 @@ export class StatAllComponent implements OnInit {
   @ViewChild('generatePdf') pdfContent!: ElementRef;
 
   statistics!: StatAllResponseType;
+  statisticsAuto!: StatResponseType;
 
   constructor(private statService: StatService) { }
 
@@ -23,6 +25,11 @@ export class StatAllComponent implements OnInit {
       .subscribe((data: StatAllResponseType) => {
         this.statistics = data;
         this.loadGoogleCharts();
+      });
+
+    this.statService.getStats()
+      .subscribe((data: StatResponseType) => {
+        this.statisticsAuto = data;
       });
   }
 
@@ -83,9 +90,11 @@ export class StatAllComponent implements OnInit {
     chart.draw(data, options);
   }
 
-  // generatePDF(): void {
-  //   if (this.pdfContent) {
-  //     (html2pdf as any).from(this.pdfContent.nativeElement).save();
-  //   }
-  // }
+  generatePDF(): void {
+    const element = this.pdfContent.nativeElement;
+
+    html2pdf()
+      .from(element)
+      .save('stat-all.pdf');
+  }
 }

@@ -1,8 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import { StatService } from "../../../shared/services/stat.service";
 import {AutomobileResponseType} from "../../../../types/automobile-response.type";
-import { jsPDF } from 'jspdf';
-import html2canvas from 'html2canvas';
+import html2pdf from "html2pdf.js";
 
 declare var google: any;
 
@@ -14,7 +13,6 @@ declare var google: any;
 export class StatIncomeComponent implements OnInit {
 
   @ViewChild('generatePdf') pdfContent!: ElementRef;
-
   statistics: AutomobileResponseType[] = [];
 
   constructor(private statService: StatService) { }
@@ -51,27 +49,11 @@ export class StatIncomeComponent implements OnInit {
   }
 
   generatePDF(): void {
-    const doc = new jsPDF();
+    const element = this.pdfContent.nativeElement;
 
-    const chartElement = document.getElementById('top5Income');
-
-    if (chartElement) {
-      html2canvas(chartElement).then((canvas) => {
-        const imgData = canvas.toDataURL('image/png');
-
-        const margin = 10; // отступы от границ страницы
-        const imgWidth = 180;  // ширина изображения
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;  // пропорциональная высота
-
-        // Добавляем изображение с корректными размерами и отступами
-        doc.addImage(imgData, 'PNG', margin, 20, imgWidth, imgHeight);
-        // doc.addImage(imgData, 'PNG', -5, 20, 180, 120);
-
-        doc.text('Топ-5 по прибыли', 10, 10);
-
-        doc.save('stat-income.pdf');
-      });
-    }
+    html2pdf()
+      .from(element)
+      .save('stat-income.pdf');
   }
 
 }

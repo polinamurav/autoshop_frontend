@@ -8,11 +8,12 @@
           <a routerLink="/stats" class="btn btn-dark w-100">Назад</a>
         </div>
         <div class="col-lg col-12 mb-2">
-<!--          <button class="btn btn-dark w-100" (click)="generatePDF()">Сгенерировать PDF</button>-->
+          <button class="btn btn-dark w-100" (click)="generatePDF()">Сгенерировать PDF</button>
         </div>
       </div>
       <hr>
       <div #generatePdf class="text-dark">
+<!--        <p class="fs-4 text-center">Общая прибыль: {{statistics.income}}</p>-->
         <hr>
         <div class="w-100 d-flex justify-content-center">
           <div id="top5Income" style="width: 600px; height: 400px;"></div>
@@ -26,6 +27,40 @@
           <div id="drawMod" style="width: 600px; height: 400px;"></div>
         </div>
         <hr>
+        <div class="row mb-2 text-center">
+          <div class="col">
+            <span class="fs-5">Автомобиль</span>
+          </div>
+          <div class="col">
+            <span class="fs-5">Модель</span>
+          </div>
+          <div class="col">
+            <span class="fs-5">В наличии</span>
+          </div>
+          <div class="col">
+            <span class="fs-5">Продано</span>
+          </div>
+          <div class="col">
+            <span class="fs-5">Прибыль</span>
+          </div>
+        </div>
+        <div *ngFor="let auto of statisticsAuto.automobiles" class="row mb-2">
+          <div class="col text-center">
+            <span>{{auto.name}}</span>
+          </div>
+          <div class="col text-center">
+            <!--            <span>{{auto.model}}</span>-->
+          </div>
+          <div class="col text-center">
+            <span>{{auto.count}}</span>
+          </div>
+          <div class="col text-center">
+            <span>{{auto.incomeCount}}</span>
+          </div>
+          <div class="col text-center">
+            <span>{{auto.incomePrice}}</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
