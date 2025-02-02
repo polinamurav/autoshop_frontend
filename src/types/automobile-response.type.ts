@@ -7,7 +7,7 @@ export type AutomobileResponseType = {
   photo: string,
   origin: string,
   count: number,
-  engineType: EngineTypeType.DIESEL,
+  engineType: EngineTypeType,
   // carModel: {
   //   id: string,
   //   name: string
@@ -17,4 +17,6 @@ export type AutomobileResponseType = {
   applications?: [],
   incomePrice?: number,
   incomeCount?: number
+
+  engineTypeRus?: string
 }

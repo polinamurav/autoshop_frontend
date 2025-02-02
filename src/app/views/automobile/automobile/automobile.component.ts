@@ -6,6 +6,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthService} from "../../../core/auth/auth.service";
 import {ApplicationService} from "../../../shared/services/application.service";
+import {EngineTypeUtil} from "../../../shared/utils/engine-type.util";
 
 @Component({
   selector: 'app-automobile',
@@ -41,6 +42,9 @@ export class AutomobileComponent implements OnInit {
       this.automobileService.getAutomobile(params['id'])
         .subscribe((data: AutomobileResponseType) => {
           this.automobile = data;
+
+          const engineType = EngineTypeUtil.getEngineType(data.engineType);
+          this.automobile.engineTypeRus = engineType.name;
         });
     });
   }

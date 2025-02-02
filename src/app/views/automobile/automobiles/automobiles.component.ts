@@ -7,6 +7,8 @@ import {FormControl} from "@angular/forms";
 import {debounceTime} from "rxjs";
 import {Router} from "@angular/router";
 import {AuthService} from "../../../core/auth/auth.service";
+import {StatusUtil} from "../../../shared/utils/status.util";
+import {EngineTypeUtil} from "../../../shared/utils/engine-type.util";
 
 @Component({
   selector: 'app-automobiles',
@@ -35,6 +37,13 @@ export class AutomobilesComponent implements OnInit {
     this.automobilesService.getAutomobiles()
       .subscribe((data: AutomobileResponseType[]) => {
         this.automobiles = data;
+
+        this.automobiles = data.map(item => {
+          const engineType = EngineTypeUtil.getEngineType(item.engineType);
+
+          item.engineTypeRus = engineType.name;
+          return item;
+        });
       });
 
     this.modelsService.getModels()
@@ -51,11 +60,25 @@ export class AutomobilesComponent implements OnInit {
           this.automobilesService.searchAutomobile(value)
             .subscribe((data: AutomobileResponseType[]) => {
               this.automobiles = data;
+
+              this.automobiles = data.map(item => {
+                const engineType = EngineTypeUtil.getEngineType(item.engineType);
+
+                item.engineTypeRus = engineType.name;
+                return item;
+              });
             });
         } else {
           this.automobilesService.getAutomobiles()
             .subscribe((data: AutomobileResponseType[]) => {
               this.automobiles = data;
+
+              this.automobiles = data.map(item => {
+                const engineType = EngineTypeUtil.getEngineType(item.engineType);
+
+                item.engineTypeRus = engineType.name;
+                return item;
+              });
             });
         }
       });
