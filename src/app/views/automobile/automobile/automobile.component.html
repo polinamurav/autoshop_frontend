@@ -23,13 +23,17 @@
             </div>
           </div>
           <div class="row mb-3">
-            <div *ngIf="!isAdmin" class="col-lg-4 col">
+            <div *ngIf="!isLogged" class="col-lg-4 col">
+              <a routerLink="/login"
+                 class="btn btn-dark w-100">Оформить</a>
+            </div>
+            <div *ngIf="!isAdmin && isLogged" class="col-lg-4 col">
               <a (click)="makeAppointment(automobile.id)"
                  class="btn btn-dark w-100">Оформить</a>
             </div>
           </div>
           <p class="lead mb-1">Цена: {{automobile.price}}</p>
-          <p class="lead mb-1">Модель: {{automobile.name}}</p>
+          <p class="lead mb-1">Модель: {{automobile.carModelName}}</p>
           <p class="lead mb-1">Тип двигателя: {{automobile.engineType}}</p>
           <p class="lead mb-1">Страна производства: {{automobile.origin}}</p>
           <p class="lead mb-1">Количество: {{automobile.count}}</p>

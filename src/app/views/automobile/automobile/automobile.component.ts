@@ -16,6 +16,7 @@ export class AutomobileComponent implements OnInit {
 
   automobile!: AutomobileResponseType;
   isAdmin: boolean = false;
+  isLogged: boolean = false;
 
   constructor(private automobileService: AutomobilesService,
               private authService: AuthService,
@@ -24,11 +25,16 @@ export class AutomobileComponent implements OnInit {
               private router: Router,
               private _snackBar: MatSnackBar) {
     this.isAdmin = this.authService.getIsAdminIn();
+    this.isLogged = this.authService.getIsLoggedIn();
   }
 
   ngOnInit(): void {
     this.authService.isAdmin$.subscribe((isAdminIn: boolean) => {
       this.isAdmin = isAdminIn;
+    });
+
+    this.authService.isLogged$.subscribe((isLoggedIn: boolean) => {
+      this.isLogged = isLoggedIn;
     });
 
     this.activatedRoute.params.subscribe(params => {
@@ -58,8 +64,8 @@ export class AutomobileComponent implements OnInit {
   makeAppointment(autoId: string) {
     this.applicationService.getUserApplication(autoId).subscribe({
       next: () => {
-        this.router.navigate(['/applications']);
         this._snackBar.open('Заявка успешно добавлена!');
+        this.router.navigate(['/applications']);
       },
       error: (errorResponse: HttpErrorResponse) => {
         if (errorResponse.error && errorResponse.error.message) {

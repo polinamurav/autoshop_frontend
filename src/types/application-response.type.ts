@@ -6,4 +6,6 @@ export type ApplicationResponseType = {
   status: StatusTypeType
   titleAuto: string,
   buyer: string,
+
+  statusRus?: string
 }

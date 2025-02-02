@@ -1,52 +1,53 @@
-<!--<div class="container-fluid">-->
+<div class="container-fluid">
 
-<!--  <h3 class="text-dark mb-4">Заявки</h3>-->
+  <h3 class="text-dark mb-4">Заявки</h3>
 
-<!--  <div class="card shadow mb-3">-->
-<!--    <div class="card-body">-->
-<!--      <div class="row">-->
-<!--        <div th:each="i : ${applications}" class="col-xl-4 col-lg-6 col-12 mb-2">-->
-<!--          <div class="row">-->
-<!--            <div class="col-4 mb-2 text-center">-->
-<!--              <a th:href="${'/automobiles/' + i.automobile.id}">-->
+  <div class="card shadow mb-3">
+    <div class="card-body">
+      <div class="row">
+        <div *ngFor="let application of applications" class="col-xl-4 col-lg-6 col-12 mb-2">
+          <div class="row">
+            <div class="col-4 mb-2 text-center">
+<!--              <a [routerLink]="'/automobiles/' + application.automobile.id">-->
 <!--                <img th:src="${'/img/' + i.automobile.photo}" class="rounded-3 shadow"-->
 <!--                     style="max-height: 250px;max-width: 100%">-->
 <!--              </a>-->
-<!--            </div>-->
-<!--            <div class="col-8 mb-2">-->
-<!--              <p class="lead mb-0" th:text="${i.automobile.name}"></p>-->
-<!--              <p class="mb-0" th:text="${'Статус: ' + i.status.name}"></p>-->
-<!--              <p class="mb-0" th:text="${'Цена: ' + i.price}"></p>-->
-<!--              <p class="mb-0" th:text="${'Модель: ' + i.automobile.carModel.name}"></p>-->
-<!--              <p class="mb-0"-->
-<!--                 th:text="${'Тип двигателя: ' + i.automobile.engineType.name}"></p>-->
-<!--              <p class="mb-0" th:text="${'Страна производства: ' + i.automobile.origin}"></p>-->
-<!--              <p th:if="${i.automobile.count == 0 and i.status.name() == 'WAITING'}" class="mb-0 text-danger">Не хватает-->
-<!--                авто-->
-<!--                на складе</p>-->
-<!--            </div>-->
-<!--            <div th:if="${i.status.name() == 'WAITING'}">-->
-<!--              <div th:if="${role == 'USER'}"-->
-<!--                   class="col-lg-auto col-12 mb-2">-->
-<!--                <a th:href="${'/applications/' + i.id + '/delete'}"-->
-<!--                   class="btn btn-dark w-100">Отменить</a>-->
-<!--              </div>-->
-<!--              <div th:if="${i.automobile.count > 0 and role == 'ADMIN'}"-->
-<!--                   class="col-lg-auto col-12 mb-2">-->
-<!--                <a th:href="${'/applications/' + i.id + '/done'}"-->
-<!--                   class="btn btn-dark w-100">Подтвердить</a>-->
-<!--              </div>-->
-<!--              <div th:if="${role == 'ADMIN'}" class="col-lg-auto col-12 mb-2">-->
-<!--                <a th:href="${'/applications/' + i.id + '/reject'}"-->
-<!--                   class="btn btn-warning w-100">Отказать</a>-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </div>-->
-<!--          <hr>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+            </div>
+            <div class="col-8 mb-2">
+              <p class="lead mb-0">{{application.titleAuto}}</p>
+              <p class="mb-0">{{application.statusRus}}</p>
+              <p class="mb-0">Цена: {{application.price}}</p>
+              <p class="mb-0">Модель: </p>
+              <p class="mb-0">Тип двигателя: </p>
+              <p class="mb-0">Страна производства: </p>
+              <p  class="mb-0 text-danger">
+<!--                *ngIf="application.count === 0 && application.status === statusTypeTypes.WAITING"-->
+                Не хватает авто на складе
+              </p>
+            </div>
+            <div *ngIf="application.status === statusTypeTypes.WAITING">
+              <div *ngIf="!isAdmin"
+                   class="col-lg-auto col-12 mb-2">
+                <a (click)="deleteApplication()"
+                   class="btn btn-dark w-100">Отменить</a>
+              </div>
+              <div
+                   class="col-lg-auto col-12 mb-2">
+<!--                *ngIf="application.count > 0 && isAdmin"-->
+                <a (click)="doneApplication()"
+                   class="btn btn-dark w-100">Подтвердить</a>
+              </div>
+              <div *ngIf="isAdmin" class="col-lg-auto col-12 mb-2">
+                <a (click)="rejectApplication()"
+                   class="btn btn-warning w-100">Отказать</a>
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<!--</div>-->
-<!--<a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>-->
+</div>
+<a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
