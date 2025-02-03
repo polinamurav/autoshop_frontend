@@ -27,6 +27,10 @@ export class StatService {
     return this.http.get<AutomobileResponseType[]>(environment.api + 'stats/income');
   }
 
+  getStatCount(): Observable<AutomobileResponseType[]> {
+    return this.http.get<AutomobileResponseType[]>(environment.api + 'stats/count');
+  }
+
   deleteStat(): Observable<DefaultResponseType> {
     return this.http.delete<DefaultResponseType>(environment.api + 'stats/reset');
   }

@@ -3,12 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import {StatAllComponent} from "./stat-all/stat-all.component";
 import {StatsComponent} from "./stats/stats.component";
 import {StatIncomeComponent} from "./stat-income/stat-income.component";
+import {StatCountComponent} from "./stat-count/stat-count.component";
 
 const routes: Routes = [
   {path: 'stats', component: StatsComponent},
   {path: 'stats/all', component: StatAllComponent},
   {path: 'stats/income', component: StatIncomeComponent},
-  // {path: 'stats/count', component: StatAllComponent},
+  {path: 'stats/count', component: StatCountComponent},
   // {path: 'stats/model', component: StatAllComponent},
 ];
 
