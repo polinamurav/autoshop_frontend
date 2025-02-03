@@ -11,6 +11,7 @@ export type AutomobileResponseType = {
   engineType: EngineTypeType,
   carModelId: number,
   carModelName: string,
+  model?: string,
   applications?: ApplicationResponseType[],
   incomePrice?: number,
   incomeCount?: number

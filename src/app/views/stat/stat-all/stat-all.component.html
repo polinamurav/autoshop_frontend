@@ -13,7 +13,7 @@
       </div>
       <hr>
       <div #generatePdf class="text-dark">
-<!--        <p class="fs-4 text-center">Общая прибыль: {{statistics.income}}</p>-->
+        <p class="fs-4 text-center">Общая прибыль: {{ statisticsAuto.income }}</p>
         <hr>
         <div class="w-100 d-flex justify-content-center">
           <div id="top5Income" style="width: 600px; height: 400px;"></div>
@@ -46,19 +46,19 @@
         </div>
         <div *ngFor="let auto of statisticsAuto.automobiles" class="row mb-2">
           <div class="col text-center">
-            <span>{{auto.name}}</span>
+            <span>{{ auto.name }}</span>
           </div>
           <div class="col text-center">
-            <!--            <span>{{auto.model}}</span>-->
+            <span>{{ auto.model }}</span>
           </div>
           <div class="col text-center">
-            <span>{{auto.count}}</span>
+            <span>{{ auto.count }}</span>
           </div>
           <div class="col text-center">
-            <span>{{auto.incomeCount}}</span>
+            <span>{{ auto.incomeCount }}</span>
           </div>
           <div class="col text-center">
-            <span>{{auto.incomePrice}}</span>
+            <span>{{ auto.incomePrice }}</span>
           </div>
         </div>
       </div>
