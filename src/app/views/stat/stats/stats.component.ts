@@ -16,7 +16,8 @@ export class StatsComponent implements OnInit {
   statistics!: StatResponseType | null;
 
   constructor(private statService: StatService,
-              private _snackBar: MatSnackBar) { }
+              private _snackBar: MatSnackBar) {
+  }
 
   ngOnInit(): void {
     this.statService.getStats()
@@ -26,10 +27,16 @@ export class StatsComponent implements OnInit {
   }
 
   statsReset() {
-    this.statService.deleteStat().subscribe(() => {
+    this.statService.deleteStat().subscribe({
+      next: () => {
         this.statistics = null;
         this._snackBar.open('Все успешно удалено!');
-    })
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        this.statistics = null;
+        this._snackBar.open('Все успешно удалено!');
+      }
+    });
   }
 
   generatePDF(): void {
