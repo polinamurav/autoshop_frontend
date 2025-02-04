@@ -85,8 +85,15 @@ export class StatAllComponent implements OnInit {
       data.addRow([model.name, model.price]);
     });
 
-    const options = { title: 'Прибыль по моделям', width: 600, height: 400 };
-    const chart = new google.visualization.ColumnChart(document.getElementById('drawMod'));
+    const options = {
+      title: 'Прибыль по моделям',
+      width: 600,
+      height: 400,
+      is3D: true,
+      pieSliceText: 'percentage'
+    };
+
+    const chart = new google.visualization.PieChart(document.getElementById('drawMod'));
     chart.draw(data, options);
   }
 

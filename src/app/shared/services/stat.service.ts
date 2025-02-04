@@ -7,6 +7,7 @@ import {StatAllResponseType} from "../../../types/stat-all-response.type";
 import {AutomobileResponseType} from "../../../types/automobile-response.type";
 import {SignupResponseType} from "../../../types/signup-response.type";
 import {DefaultResponseType} from "../../../types/default-response.type";
+import {StatModelResponseType} from "../../../types/stat-model-response.type";
 
 @Injectable({
   providedIn: 'root'
@@ -29,6 +30,10 @@ export class StatService {
 
   getStatCount(): Observable<AutomobileResponseType[]> {
     return this.http.get<AutomobileResponseType[]>(environment.api + 'stats/count');
+  }
+
+  getStatModel(): Observable<StatModelResponseType[]> {
+    return this.http.get<StatModelResponseType[]>(environment.api + 'stats/model');
   }
 
   deleteStat(): Observable<DefaultResponseType> {
