@@ -24,6 +24,10 @@ export class ApplicationService {
     return this.http.post<ApplicationResponseType>(environment.api + 'application/' + id + '/reject', {});
   }
 
+  deleteApplications(id: string): Observable<ApplicationResponseType> {
+    return this.http.post<ApplicationResponseType>(environment.api + 'application/' + id + '/delete', {});
+  }
+
   getUserApplication(id: string): Observable<ApplicationResponseType> {
     return this.http.post<ApplicationResponseType>(environment.api + 'automobiles/' + id + '/application', {});
   }

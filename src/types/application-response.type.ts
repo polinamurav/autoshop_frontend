@@ -16,4 +16,5 @@ export type ApplicationResponseType = {
 
   automobileEngineTypeRus?: string,
   statusRus?: string
+  color: string
 }

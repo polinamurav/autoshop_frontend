@@ -18,7 +18,7 @@
             </div>
             <div class="col-8 mb-2">
               <p class="lead mb-0">{{application.titleAuto}}</p>
-              <p class="mb-0">{{application.statusRus}}</p>
+              <p class="mb-0" style="color: {{application.color}}">{{application.statusRus}}</p>
               <p class="mb-0">Цена: {{application.price}}</p>
               <p class="mb-0">Модель: {{application.automobileModel}}</p>
               <p class="mb-0">Тип двигателя: {{application?.automobileEngineTypeRus}}</p>
@@ -30,7 +30,7 @@
             <div *ngIf="application.status === statusTypeTypes.WAITING">
               <div *ngIf="!isAdmin"
                    class="col-lg-auto col-12 mb-2">
-                <a (click)="deleteApplication()"
+                <a (click)="deleteApplication(application.id)"
                    class="btn btn-dark w-100">Отменить</a>
               </div>
               <div class="col-lg-auto col-12 mb-2" *ngIf="application.automobileCount > 0 && isAdmin">

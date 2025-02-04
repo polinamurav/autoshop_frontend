@@ -40,14 +40,26 @@ export class ApplicationsComponent implements OnInit {
           const engineType = EngineTypeUtil.getEngineType(item.automobileEngineType);
 
           item.statusRus = status.name;
+          item.color = status.color;
           item.automobileEngineTypeRus = engineType.name;
           return item;
         });
       });
   }
 
-  deleteApplication() {
-
+  deleteApplication(id: string) {
+    this.applicationService.deleteApplications(id).subscribe({
+      next: () => {
+        this._snackBar.open('Заявка отказана!');
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        if (errorResponse.error && errorResponse.error.message) {
+          this._snackBar.open(errorResponse.error.message);
+        } else {
+          this._snackBar.open('Ошибка отказа');
+        }
+      }
+    })
   }
 
   doneApplication(id: string) {
