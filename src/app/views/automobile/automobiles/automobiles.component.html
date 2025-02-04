@@ -13,30 +13,7 @@
     <strong>Ничего не найдено!</strong>
   </div>
 
-  <div class="row" *ngIf="automobiles && automobiles.length > 0">
-    <div class="col-12 col-lg-4 mb-3" *ngFor="let automobile of automobiles">
-      <div class="card shadow">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-5 col-12 text-center">
-              <a [routerLink]="'/automobiles/' + automobile.id">
-                <img [src]="automobile.photo" class="rounded-3 shadow"
-                     style="max-height: 250px;max-width: 100%">
-              </a>
-            </div>
-            <div class="col">
-              <p class="lead mb-1">{{ automobile.name }}</p>
-              <p class="mb-1">Цена: {{ automobile.price }}</p>
-              <p class="mb-1">Модель: {{ automobile.carModelName }}</p>
-              <p class="mb-1">Тип двигателя: {{ automobile.engineTypeRus }}</p>
-              <p class="mb-1">Страна производства: {{ automobile.origin }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <automobile-card [automobiles]="automobiles"></automobile-card>
 
 </div>
 <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>

@@ -2,8 +2,9 @@
   <h3 class="text-dark mb-4">Главная страница</h3>
 
   <div class="card shadow mb-3 p-3">
-    <div class="text-center mb-2">
-      <img class="w-50 rounded-3 shadow" src="assets/img/automobiles.jpg">
+    <div class="mb-4 d-flex">
+      <img class="w-50 shadow me-2" src="assets/img/automobiles.jpg" style="height: 300px;">
+      <img class="w-50 shadow" src="assets/img/automobiles2.jpg" style="height: 300px;">
     </div>
     <div class="row">
       <div class="col"></div>
@@ -20,29 +21,7 @@
     </div>
   </div>
 
-  <div class="row" *ngIf="automobiles && automobiles.length > 0">
-    <div *ngFor="let automobile of automobiles" class="col-12 col-lg-4 mb-3">
-      <div class="card shadow">
-        <div class="card-body">
-          <div class="row">
-            <div class="col-lg-5 col-12 text-center">
-              <a [routerLink]="'/automobiles/' + automobile.id">
-                <img [src]="automobile.photo"class="rounded-3 shadow"
-                     style="max-height: 250px;max-width: 100%">
-              </a>
-            </div>
-            <div class="col">
-              <p class="lead mb-1">{{ automobile.name }}</p>
-              <p class="mb-1">Цена: {{ automobile.price }}</p>
-              <p class="mb-1">Модель: {{ automobile.carModelName }}</p>
-              <p class="mb-1">Тип двигателя: {{ automobile.engineType }}</p>
-              <p class="mb-1">Страна производства: {{ automobile.origin }}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <automobile-card [automobiles]="automobiles"></automobile-card>
 
 </div>
 <a class="border rounded d-inline scroll-to-top" href="#page-top"><i class="fas fa-angle-up"></i></a>
