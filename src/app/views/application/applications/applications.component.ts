@@ -50,6 +50,7 @@ export class ApplicationsComponent implements OnInit {
   deleteApplication(id: string) {
     this.applicationService.deleteApplications(id).subscribe({
       next: () => {
+        this.applications = this.applications.filter(app => app.id !== id);
         this._snackBar.open('Заявка отказана!');
       },
       error: (errorResponse: HttpErrorResponse) => {
@@ -64,8 +65,23 @@ export class ApplicationsComponent implements OnInit {
 
   doneApplication(id: string) {
     this.applicationService.doneApplications(id).subscribe({
-      next: () => {
-        this._snackBar.open('Заявка успешно одобрена!');
+      next: (data: ApplicationResponseType) => {
+        this.applications = this.applications.map(app => {
+          if (app.id === data.id) {
+            const status = StatusUtil.getStatus(data.status);
+            const engineType = EngineTypeUtil.getEngineType(data.automobileEngineType);
+
+            return {
+              ...app,
+              ...data,
+              statusRus: status.name,
+              color: status.color,
+              automobileEngineTypeRus: engineType.name
+            };
+          }
+          return app;
+        });
+        this._snackBar.open('Заявка одобрена!');
       },
       error: (errorResponse: HttpErrorResponse) => {
         if (errorResponse.error && errorResponse.error.message) {
@@ -79,7 +95,22 @@ export class ApplicationsComponent implements OnInit {
 
   rejectApplication(id: string) {
     this.applicationService.rejectApplications(id).subscribe({
-      next: () => {
+      next: (data: ApplicationResponseType) => {
+        this.applications = this.applications.map(app => {
+          if (app.id === data.id) {
+            const status = StatusUtil.getStatus(data.status);
+            const engineType = EngineTypeUtil.getEngineType(data.automobileEngineType);
+
+            return {
+              ...app,
+              ...data,
+              statusRus: status.name,
+              color: status.color,
+              automobileEngineTypeRus: engineType.name
+            };
+          }
+          return app;
+        });
         this._snackBar.open('Заявка отменена');
       },
       error: (errorResponse: HttpErrorResponse) => {
