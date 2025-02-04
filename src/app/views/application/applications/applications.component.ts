@@ -22,7 +22,6 @@ export class ApplicationsComponent implements OnInit {
 
   constructor(private applicationService: ApplicationService,
               private authService: AuthService,
-              private router: Router,
               private _snackBar: MatSnackBar) {
     this.isAdmin = this.authService.getIsAdminIn();
   }
@@ -66,7 +65,18 @@ export class ApplicationsComponent implements OnInit {
     })
   }
 
-  rejectApplication() {
-
+  rejectApplication(id: string) {
+    this.applicationService.rejectApplications(id).subscribe({
+      next: () => {
+        this._snackBar.open('Заявка отменена');
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        if (errorResponse.error && errorResponse.error.message) {
+          this._snackBar.open(errorResponse.error.message);
+        } else {
+          this._snackBar.open('Ошибка отмены');
+        }
+      }
+    })
   }
 }

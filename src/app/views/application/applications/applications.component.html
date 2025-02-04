@@ -23,8 +23,7 @@
               <p class="mb-0">Модель: {{application.automobileModel}}</p>
               <p class="mb-0">Тип двигателя: {{application?.automobileEngineTypeRus}}</p>
               <p class="mb-0">Страна производства: {{application.automobileOrigin}}</p>
-              <p  class="mb-0 text-danger">
-<!--                *ngIf="application.count === 0 && application.status === statusTypeTypes.WAITING"-->
+              <p  class="mb-0 text-danger" *ngIf="application.automobileCount === 0 && application.status === statusTypeTypes.WAITING">
                 Не хватает авто на складе
               </p>
             </div>
@@ -34,14 +33,12 @@
                 <a (click)="deleteApplication()"
                    class="btn btn-dark w-100">Отменить</a>
               </div>
-              <div
-                   class="col-lg-auto col-12 mb-2">
-<!--                *ngIf="application.count > 0 && isAdmin"-->
+              <div class="col-lg-auto col-12 mb-2" *ngIf="application.automobileCount > 0 && isAdmin">
                 <a (click)="doneApplication(application.id)"
                    class="btn btn-dark w-100">Подтвердить</a>
               </div>
               <div *ngIf="isAdmin" class="col-lg-auto col-12 mb-2">
-                <a (click)="rejectApplication()"
+                <a (click)="rejectApplication(application.id)"
                    class="btn btn-warning w-100">Отказать</a>
               </div>
             </div>
