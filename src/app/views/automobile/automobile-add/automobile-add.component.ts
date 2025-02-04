@@ -10,6 +10,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {ModelType} from "../../../../types/model.type";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ModelsService} from "../../../shared/services/models.service";
+import {EngineTypeUtil} from "../../../shared/utils/engine-type.util";
 
 @Component({
   selector: 'app-automobile-add',
@@ -18,7 +19,11 @@ import {ModelsService} from "../../../shared/services/models.service";
 })
 export class AutomobileAddComponent implements OnInit {
 
-  engineTypes = Object.values(EngineTypeType);
+  // engineTypes = Object.values(EngineTypeType);
+  engineTypes = Object.values(EngineTypeType).map(type => ({
+    value: type,
+    label: EngineTypeUtil.getEngineType(type).name
+  }));
   automobiles: AutomobileResponseType[] = [];
   models: ModelType[] = [];
   selectedCarModel: number = 1;
@@ -105,4 +110,6 @@ export class AutomobileAddComponent implements OnInit {
       });
     }
   }
+
+  protected readonly EngineTypeUtil = EngineTypeUtil;
 }

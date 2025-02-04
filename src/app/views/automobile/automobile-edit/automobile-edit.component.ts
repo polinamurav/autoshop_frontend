@@ -9,6 +9,7 @@ import {ModelType} from "../../../../types/model.type";
 import {ModelsService} from "../../../shared/services/models.service";
 import {DefaultResponseType} from "../../../../types/default-response.type";
 import {HttpErrorResponse} from "@angular/common/http";
+import {EngineTypeUtil} from "../../../shared/utils/engine-type.util";
 
 @Component({
   selector: 'app-automobile-edit',
@@ -18,7 +19,10 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class AutomobileEditComponent implements OnInit {
 
   models: ModelType[] = [];
-  engineTypes = Object.values(EngineTypeType);
+  engineTypes = Object.values(EngineTypeType).map(type => ({
+    value: type,
+    label: EngineTypeUtil.getEngineType(type).name
+  }));
   automobileForm = this.fb.group({
     name: ['', Validators.required],
     price: [0, Validators.required],

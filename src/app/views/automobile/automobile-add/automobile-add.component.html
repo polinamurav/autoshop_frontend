@@ -43,7 +43,9 @@
           </div>
           <div class="col-lg-6 col-12 mb-2">
             <select name="engineType" class="form-select" formControlName="engineType">
-              <option *ngFor="let engineType of engineTypes" [value]="engineType">{{ engineType }}</option>
+              <option *ngFor="let engineType of engineTypes" [value]="engineType.value">
+                {{ engineType.label }}
+              </option>
             </select>
           </div>
           <div class="col-lg-6 col-12 mb-2">
