@@ -14,5 +14,6 @@ export type ApplicationResponseType = {
   automobileModel: string,
   automobileCount: number
 
+  automobileEngineTypeRus?: string,
   statusRus?: string
 }

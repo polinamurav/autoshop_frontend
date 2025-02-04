@@ -3,23 +3,26 @@
   <h3 class="text-dark mb-4">Заявки</h3>
 
   <div class="card shadow mb-3">
+    <div *ngIf="applications.length === 0" class="alert alert-warning text-center" role="alert">
+      <strong>Ничего не найдено!</strong>
+    </div>
     <div class="card-body">
       <div class="row">
         <div *ngFor="let application of applications" class="col-xl-4 col-lg-6 col-12 mb-2">
           <div class="row">
             <div class="col-4 mb-2 text-center">
-<!--              <a [routerLink]="'/automobiles/' + application.automobile.id">-->
-<!--                <img th:src="${'/img/' + i.automobile.photo}" class="rounded-3 shadow"-->
-<!--                     style="max-height: 250px;max-width: 100%">-->
-<!--              </a>-->
+              <a [routerLink]="'/automobiles/' + application.automobileId">
+                <img [src]="application.automobilePhoto"  class="rounded-3 shadow"
+                     style="max-height: 250px;max-width: 100%">
+              </a>
             </div>
             <div class="col-8 mb-2">
               <p class="lead mb-0">{{application.titleAuto}}</p>
               <p class="mb-0">{{application.statusRus}}</p>
               <p class="mb-0">Цена: {{application.price}}</p>
-              <p class="mb-0">Модель: </p>
-              <p class="mb-0">Тип двигателя: </p>
-              <p class="mb-0">Страна производства: </p>
+              <p class="mb-0">Модель: {{application.automobileModel}}</p>
+              <p class="mb-0">Тип двигателя: {{application?.automobileEngineTypeRus}}</p>
+              <p class="mb-0">Страна производства: {{application.automobileOrigin}}</p>
               <p  class="mb-0 text-danger">
 <!--                *ngIf="application.count === 0 && application.status === statusTypeTypes.WAITING"-->
                 Не хватает авто на складе
@@ -34,7 +37,7 @@
               <div
                    class="col-lg-auto col-12 mb-2">
 <!--                *ngIf="application.count > 0 && isAdmin"-->
-                <a (click)="doneApplication()"
+                <a (click)="doneApplication(application.id)"
                    class="btn btn-dark w-100">Подтвердить</a>
               </div>
               <div *ngIf="isAdmin" class="col-lg-auto col-12 mb-2">

@@ -4,6 +4,10 @@ import {ApplicationResponseType} from "../../../../types/application-response.ty
 import {AuthService} from "../../../core/auth/auth.service";
 import {StatusTypeType} from "../../../../types/status-type.type";
 import {StatusUtil} from "../../../shared/utils/status.util";
+import {EngineTypeUtil} from "../../../shared/utils/engine-type.util";
+import {HttpErrorResponse} from "@angular/common/http";
+import {Router} from "@angular/router";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-applications',
@@ -17,7 +21,9 @@ export class ApplicationsComponent implements OnInit {
   statusTypeTypes = StatusTypeType;
 
   constructor(private applicationService: ApplicationService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private router: Router,
+              private _snackBar: MatSnackBar) {
     this.isAdmin = this.authService.getIsAdminIn();
   }
 
@@ -32,8 +38,10 @@ export class ApplicationsComponent implements OnInit {
 
         this.applications = data.map(item => {
           const status = StatusUtil.getStatus(item.status);
+          const engineType = EngineTypeUtil.getEngineType(item.automobileEngineType);
 
           item.statusRus = status.name;
+          item.automobileEngineTypeRus = engineType.name;
           return item;
         });
       });
@@ -43,8 +51,19 @@ export class ApplicationsComponent implements OnInit {
 
   }
 
-  doneApplication() {
-
+  doneApplication(id: string) {
+    this.applicationService.doneApplications(id).subscribe({
+      next: () => {
+        this._snackBar.open('Заявка успешно одобрена!');
+      },
+      error: (errorResponse: HttpErrorResponse) => {
+        if (errorResponse.error && errorResponse.error.message) {
+          this._snackBar.open(errorResponse.error.message);
+        } else {
+          this._snackBar.open('Ошибка одобрения');
+        }
+      }
+    })
   }
 
   rejectApplication() {
