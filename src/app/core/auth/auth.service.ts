@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {BehaviorSubject, Observable, Subject} from "rxjs";
+import {BehaviorSubject, Observable, ReplaySubject, Subject} from "rxjs";
 import {SignupResponseType} from "../../../types/signup-response.type";
 import {DefaultResponseType} from "../../../types/default-response.type";
 import {LoginResponseType} from "../../../types/login-response.type";
@@ -17,15 +17,15 @@ export class AuthService {
   public isLogged$: Subject<boolean> = new Subject<boolean>();
   private isLogged: boolean = false;
 
-  // public isAdmin$: Subject<boolean> = new Subject<boolean>();
-  public isAdmin$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isAdmin$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
   private isAdmin: boolean = false;
 
   constructor(private http: HttpClient) {
     this.isLogged = !!localStorage.getItem(this.accessTokenKey);
 
     const storedRole = localStorage.getItem(this.userRoleKey);
-    this.isAdmin = storedRole === 'ROLE_ADMIN';
+    // this.isAdmin = storedRole === 'ROLE_ADMIN';
+    this.isAdmin = storedRole ? JSON.parse(storedRole).includes('ROLE_ADMIN') : false;
 
     this.isLogged$.next(this.isLogged);
     this.isAdmin$.next(this.isAdmin);
@@ -51,12 +51,12 @@ export class AuthService {
     return this.isAdmin
   }
 
-  public setToken(accessToken: string, userRole: string): void {
+  public setToken(accessToken: string, userRole: string[]): void {
     localStorage.setItem(this.accessTokenKey, accessToken);
-    localStorage.setItem(this.userRoleKey, userRole)
+    localStorage.setItem(this.userRoleKey, JSON.stringify(userRole));
 
     this.isLogged = true;
-    this.isAdmin = userRole === 'ROLE_ADMIN';
+    this.isAdmin = userRole.includes('ROLE_ADMIN');
 
     this.isLogged$.next(true);
     this.isAdmin$.next(this.isAdmin);
@@ -83,10 +83,6 @@ export class AuthService {
       roles: localStorage.getItem(this.userRoleKey) as RoleTypeType | null
     }
   }
-
-  // logout(): void {
-  //   this.removeToken();
-  // }
 
   public getToken(): { accessToken: string | null } {
     return {

@@ -6,7 +6,7 @@
     <ul class="navbar-nav text-light ms-auto" id="accordionSidebar">
       <li class="nav-item"><a class="nav-link text-dark" *ngIf="!isLogged" routerLink="/login"><span>Вход</span></a></li>
       <li class="nav-item"><a class="nav-link text-dark" *ngIf="!isLogged" routerLink="/signup"><span>Регистрация</span></a></li>
-      <li class="nav-item"><a class="nav-link text-dark" *ngIf="isLogged" (click)="logout()"><span>Выход</span></a></li>
+      <li class="nav-item"><a class="nav-link text-dark" style="cursor: pointer" *ngIf="isLogged" (click)="logout()"><span>Выход</span></a></li>
     </ul>
     <ul class="navbar-nav flex-nowrap ms-auto">
     </ul>
