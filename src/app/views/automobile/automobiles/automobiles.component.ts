@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AutomobileResponseType} from "../../../../types/automobile-response.type";
 import {AutomobilesService} from "../../../shared/services/automobiles.service";
 import {ModelType} from "../../../../types/model.type";
@@ -7,7 +7,6 @@ import {FormControl} from "@angular/forms";
 import {debounceTime} from "rxjs";
 import {Router} from "@angular/router";
 import {AuthService} from "../../../core/auth/auth.service";
-import {StatusUtil} from "../../../shared/utils/status.util";
 import {EngineTypeUtil} from "../../../shared/utils/engine-type.util";
 
 @Component({

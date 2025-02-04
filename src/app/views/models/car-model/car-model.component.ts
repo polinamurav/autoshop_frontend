@@ -1,8 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ModelType} from "../../../../types/model.type";
-import {AutomobilesService} from "../../../shared/services/automobiles.service";
-import {Router} from "@angular/router";
-import {AuthService} from "../../../core/auth/auth.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {FormBuilder, Validators} from "@angular/forms";
 import {DefaultResponseType} from "../../../../types/default-response.type";
@@ -21,10 +18,7 @@ export class CarModelComponent implements OnInit {
     name: ['', Validators.required],
   })
 
-  constructor(private router: Router,
-              private automobilesService: AutomobilesService,
-              private modelsService: ModelsService,
-              private authService: AuthService,
+  constructor(private modelsService: ModelsService,
               private _snackBar: MatSnackBar,
               private fb: FormBuilder) {
   }
@@ -58,12 +52,10 @@ export class CarModelComponent implements OnInit {
           this.models.push(modelResponse);
           this.addModelForm.reset();
           this._snackBar.open('Модель успешно добавлен!');
-          // this.router.navigate(['/models']);
         },
         error: (errorResponse: HttpErrorResponse) => {
           if (errorResponse.error && errorResponse.error.message) {
             this._snackBar.open(errorResponse.error.message);
-            // console.log(errorResponse.error.message);
           } else {
             this._snackBar.open('Ошибка добавления');
           }

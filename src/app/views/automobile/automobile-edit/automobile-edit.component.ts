@@ -47,7 +47,6 @@ export class AutomobileEditComponent implements OnInit {
       this.automobileService.getAutomobile(params['id'])
         .subscribe((data: AutomobileResponseType) => {
           this.originAutomobile = {...data};
-          // this.automobileForm.patchValue(data);
           this.automobileForm.patchValue({
             name: data.name,
             price: data.price,

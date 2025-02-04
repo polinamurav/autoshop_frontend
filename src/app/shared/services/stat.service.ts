@@ -5,7 +5,6 @@ import {environment} from "../../../environments/environment";
 import {StatResponseType} from "../../../types/stat-response.type";
 import {StatAllResponseType} from "../../../types/stat-all-response.type";
 import {AutomobileResponseType} from "../../../types/automobile-response.type";
-import {SignupResponseType} from "../../../types/signup-response.type";
 import {DefaultResponseType} from "../../../types/default-response.type";
 import {StatModelResponseType} from "../../../types/stat-model-response.type";
 

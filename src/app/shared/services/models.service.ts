@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {Observable} from "rxjs";
-import {AutomobileResponseType} from "../../../types/automobile-response.type";
 import {DefaultResponseType} from "../../../types/default-response.type";
 import {environment} from "../../../environments/environment";
 import {ModelType} from "../../../types/model.type";

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AutomobileResponseType} from "../../../../types/automobile-response.type";
 import {AutomobilesService} from "../../../shared/services/automobiles.service";
-import {AuthService} from "../../../core/auth/auth.service";
 import {FormBuilder, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {EngineTypeType} from "../../../../types/engine-type.type";
@@ -19,7 +18,6 @@ import {EngineTypeUtil} from "../../../shared/utils/engine-type.util";
 })
 export class AutomobileAddComponent implements OnInit {
 
-  // engineTypes = Object.values(EngineTypeType);
   engineTypes = Object.values(EngineTypeType).map(type => ({
     value: type,
     label: EngineTypeUtil.getEngineType(type).name
@@ -78,23 +76,7 @@ export class AutomobileAddComponent implements OnInit {
 
       this.automobilesService.addAutomobile(formData).subscribe({
         next: (data: AutomobileResponseType | DefaultResponseType) => {
-          let error = null;
-          if ((data as DefaultResponseType).status === 400) {
-            error = (data as DefaultResponseType).message;
-          }
-
           const automobileResponse = data as AutomobileResponseType;
-          // if (!automobileResponse.id || !automobileResponse.name || !automobileResponse.photo
-          //   || !automobileResponse.origin || !automobileResponse.price || !automobileResponse.count
-          //   || automobileResponse.engineType || !automobileResponse.carModel || !automobileResponse.applications
-          //   || !automobileResponse.incomePrice || !automobileResponse.incomeCount) {
-          //   error = 'Ошибка добавления';
-          // }
-          //
-          // if (error) {
-          //   // this._snackBar.open(error);
-          //   throw new Error(error);
-          // }
 
           this._snackBar.open('Автомобиль успешно добавлен!');
           this.router.navigate(['/automobiles/' + automobileResponse.id]);
@@ -102,7 +84,6 @@ export class AutomobileAddComponent implements OnInit {
         error: (errorResponse: HttpErrorResponse) => {
           if (errorResponse.error && errorResponse.error.message) {
             this._snackBar.open(errorResponse.error.message);
-            // console.log(errorResponse.error.message);
           } else {
             this._snackBar.open('Ошибка добавления');
           }
@@ -110,6 +91,4 @@ export class AutomobileAddComponent implements OnInit {
       });
     }
   }
-
-  protected readonly EngineTypeUtil = EngineTypeUtil;
 }

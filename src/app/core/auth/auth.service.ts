@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {BehaviorSubject, Observable, ReplaySubject, Subject} from "rxjs";
+import {Observable, ReplaySubject, Subject} from "rxjs";
 import {SignupResponseType} from "../../../types/signup-response.type";
 import {DefaultResponseType} from "../../../types/default-response.type";
 import {LoginResponseType} from "../../../types/login-response.type";
@@ -24,7 +24,6 @@ export class AuthService {
     this.isLogged = !!localStorage.getItem(this.accessTokenKey);
 
     const storedRole = localStorage.getItem(this.userRoleKey);
-    // this.isAdmin = storedRole === 'ROLE_ADMIN';
     this.isAdmin = storedRole ? JSON.parse(storedRole).includes('ROLE_ADMIN') : false;
 
     this.isLogged$.next(this.isLogged);

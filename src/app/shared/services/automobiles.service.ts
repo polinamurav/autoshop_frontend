@@ -4,7 +4,6 @@ import {Observable} from "rxjs";
 import {AutomobileResponseType} from "../../../types/automobile-response.type";
 import {environment} from "../../../environments/environment";
 import {DefaultResponseType} from "../../../types/default-response.type";
-import {SignupResponseType} from "../../../types/signup-response.type";
 
 @Injectable({
   providedIn: 'root'

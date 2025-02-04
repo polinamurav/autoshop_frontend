@@ -1,6 +1,5 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {AuthService} from "../../../core/auth/auth.service";
-import {RoleTypeType} from "../../../../types/role-type.type";
 
 @Component({
   selector: 'app-header-left',
@@ -18,7 +17,6 @@ export class HeaderLeftComponent implements OnInit {
 
   ngOnInit(): void {
     this.authService.isAdmin$.subscribe(isAdmin => {
-      console.log("HeaderLeftComponent: Статус администратора обновлен:", isAdmin);
       this.isAdmin = isAdmin;
     });
   }
